@@ -230,11 +230,6 @@ namespace LogParser
                     ListViewItem item = new ListViewItem(file.Name);
                     lView.Items.Add(item);
                     txtPath.Text = fullPath;
-
-                    //StreamReader sr = new StreamReader(
-                    //    new FileStream(file.FullName, FileMode.Open), Encoding.Default);
-                    //richTxtBox.Text = sr.ReadToEnd();
-                    //AddLineNumbers();
                 }
             }
             catch (Exception ex)
@@ -414,8 +409,26 @@ namespace LogParser
             richTxtBox.Text = "";
 
             // 파일 경로 통하여 text 읽어오기
+            ReadFile(txtPath.Text);
+        }
+
+        private void lView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if(lView.SelectedItems.Count == 1)
+            {
+                ListView.SelectedListViewItemCollection items = lView.SelectedItems;
+                ListViewItem item = items[0];
+
+                string fullPath = txtPath.Text + '\\' + item.Text;
+
+                ReadFile(fullPath);
+            }
+        }
+
+        public void ReadFile(string fullPath)
+        {
             StreamReader sr = new StreamReader(
-                new FileStream(txtPath.Text, FileMode.Open), Encoding.Default);
+                new FileStream(fullPath, FileMode.Open), Encoding.Default);
             richTxtBox.Text = sr.ReadToEnd();
             AddLineNumbers();
         }

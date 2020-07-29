@@ -242,8 +242,9 @@ namespace LogParser
             this.lView.Size = new System.Drawing.Size(186, 560);
             this.lView.TabIndex = 0;
             this.lView.UseCompatibleStateImageBehavior = false;
-            this.lView.View = System.Windows.Forms.View.List;
+            this.lView.View = System.Windows.Forms.View.Tile;
             this.lView.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lView_DrawItem);
+            this.lView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lView_MouseDoubleClick);
             // 
             // tabControl2
             // 
