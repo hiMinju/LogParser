@@ -10,12 +10,28 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Drawing.Text;
+using System.Text.RegularExpressions;
 
 namespace LogParser
 {
+    public struct Location
+    {
+        public Location(int start, int end)
+        {
+            this.start = start;
+            this.end = end;
+        }
+
+        public int start { get; set; }
+        public int end { get; set; }
+    };
+
     public partial class Form1 : Form
     {
         private bool firstLoad = false;
+        // 모든 키워드 위치, 길이 저장
+        private List<Location> locations = new List<Location>();
+        private int index;
 
         //global brushes with ordinary/selected colors
         private SolidBrush reportsForegroundBrushSelected = new SolidBrush(Color.White);
@@ -44,7 +60,7 @@ namespace LogParser
             FileDialog.FilterIndex = 1;
             FileDialog.InitialDirectory = "C:\\Neozensoft\\Framework\\COM_LOG";
 
-            if(FileDialog.ShowDialog() == DialogResult.OK)
+            if (FileDialog.ShowDialog() == DialogResult.OK)
             {
                 richTxtBox.Clear();
                 txtPath.Text = FileDialog.FileName;
@@ -59,6 +75,12 @@ namespace LogParser
 
                 //richTxtBox.Text = fileContent;
                 AddLineNumbers();
+
+                if (btnSearch.Text == "마침")
+                {
+                    btnSearch.Text = "검색";
+                    txtSearch.Text = "";
+                }
             }
         }
 
@@ -280,17 +302,103 @@ namespace LogParser
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if(btnSearch.Text == "검색")
+            if(btnSearch.Text == "검색" && txtSearch.Text!="")
             {
                 btnSearch.Text = "마침";
             }
-            else
+            else // text가 마침일 때
             {
                 btnSearch.Text = "검색";
+
+                foreach (Location loc in locations)
+                {
+                    richTxtBox.Select(loc.start, loc.end);
+                    richTxtBox.SelectionColor = Color.Black;
+                    richTxtBox.SelectionBackColor = Color.White;
+                }
+                locations.Clear();
+                txtSearch.Text = "";
+                return;
+            }
+            SearchKeyword();
+        }
+
+        private void SearchKeyword()
+        {
+            // 키워드 검색 이벤트 처리
+            string text = richTxtBox.Text;
+
+            if (!text.Contains(txtSearch.Text))
+            {
+                btnSearch.Text = "검색";
+                txtSearch.Text = "";
+                MessageBox.Show("찾으시려는 문자가 존재하지 않습니다!");
+                return;
             }
 
-            // 키워드 검색 이벤트 처리
+            Regex regex = new Regex(txtSearch.Text); //Regex 사용하여 특정문자 찾기
+            MatchCollection matches = regex.Matches(richTxtBox.Text);
 
+            int iCursorPosition = richTxtBox.SelectionStart;
+            Location point = new LogParser.Location();
+
+            foreach (Match m in matches)
+            {
+                point.start = m.Index;
+                point.end = m.Length;
+
+                locations.Add(point);
+
+                richTxtBox.Select(point.start, point.end);
+                richTxtBox.SelectionColor = Color.Red;
+                richTxtBox.SelectionBackColor = Color.Aqua;
+                richTxtBox.SelectionStart = iCursorPosition;
+                richTxtBox.SelectionColor = Color.Black;
+            }
+            MessageBox.Show(locations.Count.ToString());
+        }
+
+        // 찾은 키워드 이동하며 찾기
+        private void btnUp_Click(object sender, EventArgs e)
+        {
+            if(index == 0)
+            {
+                index = locations.Count - 1;
+            }
+            else
+            {
+                --index;
+            }
+            moveFocus();
+        }
+
+        private void btnDown_Click(object sender, EventArgs e)
+        {
+            if(index == locations.Count - 1)
+            {
+                index = 0;
+            }
+            else
+            {
+                ++index;
+            }
+            moveFocus();
+        }
+
+        private void moveFocus()
+        {
+            richTxtBox.Select(locations[index].start, locations[index].end);
+            richTxtBox.SelectionStart = locations[index].start;
+            richTxtBox.Focus();
+            richTxtBox.ScrollToCaret();
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                SearchKeyword();
+            }
         }
     }
 }

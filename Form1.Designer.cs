@@ -31,6 +31,8 @@ namespace LogParser
         private void InitializeComponent()
         {
             this.panel3 = new System.Windows.Forms.Panel();
+            this.btnDown = new System.Windows.Forms.Button();
+            this.btnUp = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnFolderDlg = new System.Windows.Forms.Button();
@@ -45,13 +47,11 @@ namespace LogParser
             this.lView = new System.Windows.Forms.ListView();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabText = new System.Windows.Forms.TabPage();
-            this.btnUp = new System.Windows.Forms.Button();
             this.richTxtBox = new System.Windows.Forms.RichTextBox();
             this.LineNumTxtBox = new System.Windows.Forms.RichTextBox();
             this.tabTree = new System.Windows.Forms.TabPage();
             this.trvLog = new System.Windows.Forms.TreeView();
             this.FileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.btnDown = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -83,6 +83,29 @@ namespace LogParser
             this.panel3.Size = new System.Drawing.Size(1283, 62);
             this.panel3.TabIndex = 1;
             // 
+            // btnDown
+            // 
+            this.btnDown.Font = new System.Drawing.Font("굴림", 8F);
+            this.btnDown.Location = new System.Drawing.Point(1220, 44);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(51, 18);
+            this.btnDown.TabIndex = 6;
+            this.btnDown.Text = "DOWN";
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Visible = false;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            // 
+            // btnUp
+            // 
+            this.btnUp.Location = new System.Drawing.Point(1220, 20);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(51, 18);
+            this.btnUp.TabIndex = 5;
+            this.btnUp.Text = "UP";
+            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Visible = false;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            // 
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(1127, 33);
@@ -101,6 +124,7 @@ namespace LogParser
             this.txtSearch.Size = new System.Drawing.Size(137, 21);
             this.txtSearch.TabIndex = 3;
             this.txtSearch.Visible = false;
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
             // btnFolderDlg
             // 
@@ -242,16 +266,6 @@ namespace LogParser
             this.tabText.Text = "Text";
             this.tabText.UseVisualStyleBackColor = true;
             // 
-            // btnUp
-            // 
-            this.btnUp.Location = new System.Drawing.Point(1220, 20);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(51, 18);
-            this.btnUp.TabIndex = 5;
-            this.btnUp.Text = "UP";
-            this.btnUp.UseVisualStyleBackColor = true;
-            this.btnUp.Visible = false;
-            // 
             // richTxtBox
             // 
             this.richTxtBox.BackColor = System.Drawing.SystemColors.InactiveBorder;
@@ -302,17 +316,6 @@ namespace LogParser
             // FileDialog
             // 
             this.FileDialog.FileName = "openFileDialog1";
-            // 
-            // btnDown
-            // 
-            this.btnDown.Font = new System.Drawing.Font("굴림", 8F);
-            this.btnDown.Location = new System.Drawing.Point(1220, 44);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(51, 18);
-            this.btnDown.TabIndex = 6;
-            this.btnDown.Text = "DOWN";
-            this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Visible = false;
             // 
             // Form1
             // 
