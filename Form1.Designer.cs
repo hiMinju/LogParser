@@ -196,7 +196,7 @@ namespace LogParser
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl2);
-            this.splitContainer1.Size = new System.Drawing.Size(1283, 530);
+            this.splitContainer1.Size = new System.Drawing.Size(1283, 560);
             this.splitContainer1.SplitterDistance = 385;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -213,33 +213,36 @@ namespace LogParser
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.lView);
-            this.splitContainer2.Size = new System.Drawing.Size(385, 530);
+            this.splitContainer2.Size = new System.Drawing.Size(385, 560);
             this.splitContainer2.SplitterDistance = 195;
             this.splitContainer2.TabIndex = 0;
             // 
             // trvDir
             // 
+            this.trvDir.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.trvDir.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.trvDir.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trvDir.Location = new System.Drawing.Point(0, 0);
             this.trvDir.Name = "trvDir";
-            this.trvDir.Size = new System.Drawing.Size(195, 530);
+            this.trvDir.Size = new System.Drawing.Size(195, 560);
             this.trvDir.TabIndex = 1;
             this.trvDir.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.trvDir_BeforeExpand);
             this.trvDir.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.trvDir_BeforeSelect);
             // 
             // lView
             // 
+            this.lView.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
+            this.lView.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.lView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.lView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lView.HideSelection = false;
             this.lView.Location = new System.Drawing.Point(0, 0);
             this.lView.Name = "lView";
             this.lView.OwnerDraw = true;
-            this.lView.Size = new System.Drawing.Size(186, 530);
+            this.lView.Size = new System.Drawing.Size(186, 560);
             this.lView.TabIndex = 0;
             this.lView.UseCompatibleStateImageBehavior = false;
-            this.lView.View = System.Windows.Forms.View.Tile;
+            this.lView.View = System.Windows.Forms.View.List;
             this.lView.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lView_DrawItem);
             // 
             // tabControl2
@@ -250,7 +253,7 @@ namespace LogParser
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(894, 530);
+            this.tabControl2.Size = new System.Drawing.Size(894, 560);
             this.tabControl2.TabIndex = 0;
             this.tabControl2.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl2_Selected);
             // 
@@ -261,7 +264,7 @@ namespace LogParser
             this.tabText.Location = new System.Drawing.Point(4, 22);
             this.tabText.Name = "tabText";
             this.tabText.Padding = new System.Windows.Forms.Padding(3);
-            this.tabText.Size = new System.Drawing.Size(886, 504);
+            this.tabText.Size = new System.Drawing.Size(886, 534);
             this.tabText.TabIndex = 0;
             this.tabText.Text = "Text";
             this.tabText.UseVisualStyleBackColor = true;
@@ -274,7 +277,7 @@ namespace LogParser
             this.richTxtBox.Location = new System.Drawing.Point(69, 3);
             this.richTxtBox.Name = "richTxtBox";
             this.richTxtBox.ReadOnly = true;
-            this.richTxtBox.Size = new System.Drawing.Size(814, 498);
+            this.richTxtBox.Size = new System.Drawing.Size(814, 528);
             this.richTxtBox.TabIndex = 2;
             this.richTxtBox.Text = "";
             this.richTxtBox.VScroll += new System.EventHandler(this.richTxtBox_VScroll);
@@ -290,7 +293,7 @@ namespace LogParser
             this.LineNumTxtBox.Name = "LineNumTxtBox";
             this.LineNumTxtBox.ReadOnly = true;
             this.LineNumTxtBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.LineNumTxtBox.Size = new System.Drawing.Size(66, 498);
+            this.LineNumTxtBox.Size = new System.Drawing.Size(66, 528);
             this.LineNumTxtBox.TabIndex = 1;
             this.LineNumTxtBox.Text = "";
             // 
@@ -300,7 +303,7 @@ namespace LogParser
             this.tabTree.Location = new System.Drawing.Point(4, 22);
             this.tabTree.Name = "tabTree";
             this.tabTree.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTree.Size = new System.Drawing.Size(886, 504);
+            this.tabTree.Size = new System.Drawing.Size(886, 534);
             this.tabTree.TabIndex = 1;
             this.tabTree.Text = "TreeView";
             this.tabTree.UseVisualStyleBackColor = true;
@@ -310,7 +313,7 @@ namespace LogParser
             this.trvLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trvLog.Location = new System.Drawing.Point(3, 3);
             this.trvLog.Name = "trvLog";
-            this.trvLog.Size = new System.Drawing.Size(880, 498);
+            this.trvLog.Size = new System.Drawing.Size(880, 528);
             this.trvLog.TabIndex = 0;
             // 
             // FileDialog
@@ -319,15 +322,18 @@ namespace LogParser
             // 
             // Form1
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PowderBlue;
-            this.ClientSize = new System.Drawing.Size(1283, 592);
+            this.ClientSize = new System.Drawing.Size(1283, 622);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.panel3);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();

@@ -46,8 +46,6 @@ namespace LogParser
         {
             // 행번호 관련
             LineNumTxtBox.Font = richTxtBox.Font;
-            //richTxtBox.Select();
-            //AddLineNumbers();
 
             //// 탐색기 관련
             LoadDirectory();
@@ -224,25 +222,19 @@ namespace LogParser
                 lView.Items.Clear();
                 // 폴더를 추가한다.
                 DirectoryInfo dir = new DirectoryInfo(fullPath);
-                DirectoryInfo[] folders = dir.GetDirectories();
+                FileInfo[] files = dir.GetFiles();
 
                 FileAttributes attr = File.GetAttributes(fullPath); 
-                foreach (DirectoryInfo folder in folders)
+                foreach (FileInfo file in files)
                 {
-                    if((folder.Attributes & FileAttributes.Directory) != FileAttributes.Directory)
-                    {
-                        ListViewItem item = new ListViewItem(folder.Name);
-                        item.SubItems.Add(""); // 크기, 폴더이므로 없음
-                        item.SubItems.Add(folder.Attributes.ToString());
-                        item.SubItems.Add(folder.LastWriteTime.ToString());
+                    ListViewItem item = new ListViewItem(file.Name);
+                    lView.Items.Add(item);
+                    txtPath.Text = fullPath;
 
-                        lView.Items.Add(item);
-
-                        StreamReader sr = new StreamReader(
-                            new FileStream(fullPath, FileMode.Open), Encoding.Default);
-                        richTxtBox.Text = sr.ReadToEnd();
-                        AddLineNumbers();
-                    }
+                    //StreamReader sr = new StreamReader(
+                    //    new FileStream(file.FullName, FileMode.Open), Encoding.Default);
+                    //richTxtBox.Text = sr.ReadToEnd();
+                    //AddLineNumbers();
                 }
             }
             catch (Exception ex)
@@ -399,6 +391,33 @@ namespace LogParser
             {
                 SearchKeyword();
             }
+        }
+
+        private void Form1_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                e.Effect = DragDropEffects.All;
+            else
+                e.Effect = DragDropEffects.None;
+        }
+
+        private void Form1_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] s = (string[])e.Data.GetData(DataFormats.FileDrop, false);
+            if(s.Length>1)
+            {
+                MessageBox.Show("파일 하나만 가능합니다!");
+                return;
+            }
+
+            txtPath.Text = s[0];
+            richTxtBox.Text = "";
+
+            // 파일 경로 통하여 text 읽어오기
+            StreamReader sr = new StreamReader(
+                new FileStream(txtPath.Text, FileMode.Open), Encoding.Default);
+            richTxtBox.Text = sr.ReadToEnd();
+            AddLineNumbers();
         }
     }
 }
