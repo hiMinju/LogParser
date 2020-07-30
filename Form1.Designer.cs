@@ -282,7 +282,6 @@ namespace LogParser
             this.richTxtBox.TabIndex = 2;
             this.richTxtBox.Text = "";
             this.richTxtBox.VScroll += new System.EventHandler(this.richTxtBox_VScroll);
-            this.richTxtBox.TextChanged += new System.EventHandler(this.richTxtBox_TextChanged);
             // 
             // LineNumTxtBox
             // 
@@ -311,7 +310,9 @@ namespace LogParser
             // 
             // trvLog
             // 
+            this.trvLog.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.trvLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trvLog.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.trvLog.Location = new System.Drawing.Point(3, 3);
             this.trvLog.Name = "trvLog";
             this.trvLog.Size = new System.Drawing.Size(880, 528);

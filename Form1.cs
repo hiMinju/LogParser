@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.Drawing.Text;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace LogParser
 {
@@ -69,6 +70,8 @@ namespace LogParser
                 using (StreamReader reader = new StreamReader(fileStream, Encoding.Default))
                 {
                     richTxtBox.Text = reader.ReadToEnd();
+
+                    reader.Close();
                 }
 
                 //richTxtBox.Text = fileContent;
@@ -79,6 +82,7 @@ namespace LogParser
                     btnSearch.Text = "검색";
                     txtSearch.Text = "";
                 }
+                ControlSearch();
             }
         }
 
@@ -262,11 +266,68 @@ namespace LogParser
         private void tabControl2_Selected(object sender, TabControlEventArgs e)
         {
             ControlSearch();
+
+            if(tabControl2.SelectedTab == tabTree)
+            {
+                txtSearch.Visible = false;
+                btnSearch.Visible = false;
+                btnDown.Visible = false;
+                btnUp.Visible = false;
+
+                // treview 호출
+                if(richTxtBox.Text != "") // 조건 더 추가 필요
+                {
+                    LoadXmlTree();
+                }
+            }
         }
 
-        private void richTxtBox_TextChanged(object sender, EventArgs e)
+        private void LoadXmlTree()
         {
-            ControlSearch();
+            // TreeView에 Node가 추가될 때 TreeView Component가 update되지 않도록 함
+            trvLog.BeginUpdate();
+
+            // Node 추가
+            XmlParser parser = new XmlParser();
+            List<List<string>> list = new List<List<string>>();
+            list = parser.StringParsing(richTxtBox.Text); // 미리 text로 불러온 파일 파싱
+
+            for(int i=1; i<parser.listString.Count; i++)
+            {
+                if (parser.listString[i].Length == 5)
+                {
+                    string[] s = parser.listString[i];
+                    TreeNode node = new TreeNode(s[0]);
+
+                    for (int j = 1; j < parser.attr.Length; j++)
+                    {
+                        node.Nodes.Add(parser.attr[j]);
+                    }
+
+                    for (int j=1; j<s.Length-1; j++)
+                    {
+                        node.Nodes[j - 1].Nodes.Add(s[j]);
+                    }
+
+                    // node.Nodes[s.Length].Add() --> xml 관련 추가
+                    List<string> xml = parser.innerXml[i-1];
+
+                    for (int j = 0; j < parser.childName.Count; j++)
+                    {
+                        TreeNode childNode = new TreeNode(parser.childName[j]);
+                        //childNode.Nodes.Add(parser.attr[j]);
+
+                        childNode.Nodes.Add(xml[j]);
+                        node.Nodes[s.Length - 2].Nodes.Add(childNode);
+                    }
+
+                    trvLog.Nodes.Add(node);
+                }
+            }
+            
+            // TreeView에 Node 추가가 완료되었으면 TreeView Component가 update될 수 있도록 함
+            trvLog.EndUpdate();
+
         }
 
         private void ControlSearch()
@@ -278,12 +339,9 @@ namespace LogParser
                 btnDown.Visible = true;
                 btnUp.Visible = true;
             }
-            else
+            else if (txtSearch.Text != "")
             {
-                txtSearch.Visible = false;
-                btnSearch.Visible = false;
-                btnDown.Visible = false;
-                btnUp.Visible = false;
+                EndSearch();
             }
         }
 
@@ -291,27 +349,32 @@ namespace LogParser
         {
             if(btnSearch.Text == "검색" && txtSearch.Text!="")
             {
-                btnSearch.Text = "마침";
+                SearchKeyword();
             }
             else // text가 마침일 때
             {
-                btnSearch.Text = "검색";
-
-                foreach (Location loc in locations)
-                {
-                    richTxtBox.Select(loc.start, loc.end);
-                    richTxtBox.SelectionColor = Color.Black;
-                    richTxtBox.SelectionBackColor = Color.White;
-                }
-                locations.Clear();
-                txtSearch.Text = "";
-                return;
+                EndSearch();
             }
-            SearchKeyword();
+        }
+
+        private void EndSearch()
+        {
+            btnSearch.Text = "검색";
+
+            foreach (Location loc in locations)
+            {
+                richTxtBox.Select(loc.start, loc.end);
+                richTxtBox.SelectionColor = Color.Black;
+                richTxtBox.SelectionBackColor = Color.FromArgb(244,247,252);
+            }
+            locations.Clear();
+            txtSearch.Text = "";
         }
 
         private void SearchKeyword()
         {
+            btnSearch.Text = "마침";
+
             // 키워드 검색 이벤트 처리
             string text = richTxtBox.Text;
 
@@ -410,6 +473,7 @@ namespace LogParser
 
             // 파일 경로 통하여 text 읽어오기
             ReadFile(txtPath.Text);
+            ControlSearch();
         }
 
         private void lView_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -422,6 +486,8 @@ namespace LogParser
                 string fullPath = txtPath.Text + '\\' + item.Text;
 
                 ReadFile(fullPath);
+
+                ControlSearch();
             }
         }
 
@@ -430,6 +496,8 @@ namespace LogParser
             StreamReader sr = new StreamReader(
                 new FileStream(fullPath, FileMode.Open), Encoding.Default);
             richTxtBox.Text = sr.ReadToEnd();
+
+            sr.Close();
             AddLineNumbers();
         }
     }
