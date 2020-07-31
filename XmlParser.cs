@@ -39,17 +39,18 @@ namespace LogParser
             {
                 string[] s = listString[i];
 
+                // xml 형식일 때와 아닐 때 구분
                 XmlDocument xml = new XmlDocument(); // XmlDocument 생성
                 if(s.Length>4)
                 {
-                    for(int j=0; j <= 4; j++)
+                    for(int j=0; j < s.Length-1; j++)
                     {
                         innerAttr.Add(s[j]);
                     }
                     
                     try
                     {
-                        xml.LoadXml(s[4]);
+                        xml.LoadXml(s[s.Length-1]);
                     }
                     catch (XmlException e)
                     {

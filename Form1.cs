@@ -57,12 +57,16 @@ namespace LogParser
             var fileContent = string.Empty;
             FileDialog.Filter = "log files (*.log)|*.log|txt files (*.txt)|*.txt|All files (*.*)|*.*";
             FileDialog.FilterIndex = 1;
-            FileDialog.InitialDirectory = "C:\\Neozensoft\\Framework\\COM_LOG";
+            FileDialog.InitialDirectory = Properties.Settings.Default.PrevPath;
 
             if (FileDialog.ShowDialog() == DialogResult.OK)
             {
                 richTxtBox.Clear();
                 txtPath.Text = FileDialog.FileName;
+
+                // Change the PrevPath value
+                Properties.Settings.Default.PrevPath = txtPath.Text;
+                Properties.Settings.Default.Save();
 
                 //Read the contents of the file into a stream
                 var fileStream = FileDialog.OpenFile();

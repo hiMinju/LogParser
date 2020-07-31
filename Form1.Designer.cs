@@ -326,7 +326,7 @@ namespace LogParser
             // 
             // btnParse
             // 
-            this.btnParse.Location = new System.Drawing.Point(803, 505);
+            this.btnParse.Location = new System.Drawing.Point(784, 503);
             this.btnParse.Name = "btnParse";
             this.btnParse.Size = new System.Drawing.Size(75, 23);
             this.btnParse.TabIndex = 3;
