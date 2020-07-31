@@ -52,6 +52,7 @@ namespace LogParser
             this.tabTree = new System.Windows.Forms.TabPage();
             this.trvLog = new System.Windows.Forms.TreeView();
             this.FileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.btnParse = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -260,6 +261,7 @@ namespace LogParser
             // 
             // tabText
             // 
+            this.tabText.Controls.Add(this.btnParse);
             this.tabText.Controls.Add(this.richTxtBox);
             this.tabText.Controls.Add(this.LineNumTxtBox);
             this.tabText.Location = new System.Drawing.Point(4, 22);
@@ -322,6 +324,16 @@ namespace LogParser
             // 
             this.FileDialog.FileName = "openFileDialog1";
             // 
+            // btnParse
+            // 
+            this.btnParse.Location = new System.Drawing.Point(803, 505);
+            this.btnParse.Name = "btnParse";
+            this.btnParse.Size = new System.Drawing.Size(75, 23);
+            this.btnParse.TabIndex = 3;
+            this.btnParse.Text = "Parsing";
+            this.btnParse.UseVisualStyleBackColor = true;
+            this.btnParse.Click += new System.EventHandler(this.btnParse_Click);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -378,6 +390,7 @@ namespace LogParser
         private TextBox txtSearch;
         private Button btnUp;
         private Button btnDown;
+        private Button btnParse;
     }
 }
 

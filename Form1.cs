@@ -267,18 +267,14 @@ namespace LogParser
         {
             ControlSearch();
 
-            if(tabControl2.SelectedTab == tabTree)
+            if (tabControl2.SelectedTab == tabTree)
             {
                 txtSearch.Visible = false;
                 btnSearch.Visible = false;
                 btnDown.Visible = false;
                 btnUp.Visible = false;
 
-                // treview 호출
-                if(richTxtBox.Text != "") // 조건 더 추가 필요
-                {
-                    LoadXmlTree();
-                }
+
             }
         }
 
@@ -499,6 +495,21 @@ namespace LogParser
 
             sr.Close();
             AddLineNumbers();
+        }
+
+        private void btnParse_Click(object sender, EventArgs e)
+        {
+            if (richTxtBox.Text.StartsWith("#"))
+            {
+                MessageBox.Show("파싱할 수 있는 파일이 아닙니다!");
+                return;
+            }
+            // treview 호출
+            if (richTxtBox.Text != "") // 조건 더 추가 필요
+            {
+                LoadXmlTree();
+                MessageBox.Show("파싱을 완료하였습니다!");
+            }
         }
     }
 }
