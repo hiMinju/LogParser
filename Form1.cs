@@ -57,7 +57,16 @@ namespace LogParser
             var fileContent = string.Empty;
             FileDialog.Filter = "log files (*.log)|*.log|txt files (*.txt)|*.txt|All files (*.*)|*.*";
             FileDialog.FilterIndex = 1;
-            FileDialog.InitialDirectory = Properties.Settings.Default.PrevPath;
+
+            // 다른 사용자의 컴퓨터 환경에 따르도록 처리
+            if(Properties.Settings.Default.PrevPath=="")
+            {
+                FileDialog.InitialDirectory = Application.StartupPath;
+            }
+            else
+            {
+                FileDialog.InitialDirectory = Properties.Settings.Default.PrevPath;
+            }
 
             if (FileDialog.ShowDialog() == DialogResult.OK)
             {

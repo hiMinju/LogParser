@@ -314,7 +314,7 @@ namespace LogParser
             // 
             this.trvLog.BackColor = System.Drawing.SystemColors.InactiveBorder;
             this.trvLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trvLog.Font = new System.Drawing.Font("굴림", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.trvLog.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.trvLog.Location = new System.Drawing.Point(3, 3);
             this.trvLog.Name = "trvLog";
             this.trvLog.Size = new System.Drawing.Size(880, 528);

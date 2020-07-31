@@ -25,7 +25,7 @@ namespace LogParser.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\\\Neozensoft\\\\Framework\\\\COM_LOG")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string PrevPath {
             get {
                 return ((string)(this["PrevPath"]));
