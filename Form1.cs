@@ -286,13 +286,12 @@ namespace LogParser
                 btnSearch.Visible = false;
                 btnDown.Visible = false;
                 btnUp.Visible = false;
-
-
             }
         }
 
         private void LoadXmlTree()
         {
+            trvLog.Nodes.Clear();
             // TreeView에 Node가 추가될 때 TreeView Component가 update되지 않도록 함
             trvLog.BeginUpdate();
 
@@ -301,6 +300,7 @@ namespace LogParser
             List<List<string>> list = new List<List<string>>();
             list = parser.StringParsing(richTxtBox.Text); // 미리 text로 불러온 파일 파싱
 
+            int index = 0;
             for(int i=1; i<parser.listString.Count; i++)
             {
                 if (parser.listString[i].Length == 5)
@@ -308,29 +308,51 @@ namespace LogParser
                     string[] s = parser.listString[i];
                     TreeNode node = new TreeNode(s[0]);
 
-                    for (int j = 1; j < parser.attr.Length; j++)
+                    for (int k = 1; k < parser.attr.Length-1; k++)
                     {
-                        node.Nodes.Add(parser.attr[j]);
+                        node.Nodes.Add(parser.attr[k] +": " + s[k]);
                     }
+                    node.Nodes.Add(parser.attr[parser.attr.Length - 1]);
 
-                    for (int j=1; j<s.Length-1; j++)
-                    {
-                        node.Nodes[j - 1].Nodes.Add(s[j]);
-                    }
+                    //for (int j=1; j<s.Length-1; j++)
+                    //{
+                    //    node.Nodes[j - 1].Nodes.Add(s[j]);
+                    //}
 
                     // node.Nodes[s.Length].Add() --> xml 관련 추가
-                    List<string> xml = parser.innerXml[i-1];
-
-                    for (int j = 0; j < parser.childName.Count; j++)
+                    // for문으로 innerName, innerXml --> 두개 합쳐서 출력
+                    // List<List<String>> innerName, innerXml;
+                    int j;
+                    for (j=index; j<index+parser.tableNum[i-1]; j++)
                     {
-                        TreeNode childNode = new TreeNode(parser.childName[j]);
-                        //childNode.Nodes.Add(parser.attr[j]);
+                        List<string> name = parser.innerName[j];
+                        List<string> xml = parser.innerXml[j];
+                        TreeNode childNode = new TreeNode();
 
-                        childNode.Nodes.Add(xml[j]);
-                        node.Nodes[s.Length - 2].Nodes.Add(childNode);
+                        for(int k=0; k<name.Count; k++) 
+                        {
+                            childNode = new TreeNode(name[k] + ": " + xml[k]);
+                            node.Nodes[3].Nodes.Add(childNode);
+                            //node.Nodes[s.Length - 1].Nodes.Add(childNode);
+                        }
                     }
+                    index = j;
 
                     trvLog.Nodes.Add(node);
+
+
+                    //List<string> xml = parser.innerXml[i-1];
+
+                    //for (int j = 0; j < parser.childName.Count; j++)
+                    //{
+                    //    TreeNode childNode = new TreeNode(parser.childName[j]);
+                    //    //childNode.Nodes.Add(parser.attr[j]);
+
+                    //    childNode.Nodes.Add(xml[j]);
+                    //    childNode.Nodes.Add(xml[j]);
+                    //    node.Nodes[s.Length - 2].Nodes.Add(childNode);
+                    //}
+
                 }
             }
             

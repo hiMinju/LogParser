@@ -53,6 +53,8 @@ namespace LogParser
             this.trvLog = new System.Windows.Forms.TreeView();
             this.FileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnParse = new System.Windows.Forms.Button();
+            this.tabTable = new System.Windows.Forms.TabPage();
+            this.gridView = new System.Windows.Forms.DataGridView();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -66,6 +68,8 @@ namespace LogParser
             this.tabControl2.SuspendLayout();
             this.tabText.SuspendLayout();
             this.tabTree.SuspendLayout();
+            this.tabTable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -250,6 +254,7 @@ namespace LogParser
             // tabControl2
             // 
             this.tabControl2.Controls.Add(this.tabText);
+            this.tabControl2.Controls.Add(this.tabTable);
             this.tabControl2.Controls.Add(this.tabTree);
             this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
@@ -283,6 +288,7 @@ namespace LogParser
             this.richTxtBox.Size = new System.Drawing.Size(814, 528);
             this.richTxtBox.TabIndex = 2;
             this.richTxtBox.Text = "";
+            this.richTxtBox.WordWrap = false;
             this.richTxtBox.VScroll += new System.EventHandler(this.richTxtBox_VScroll);
             // 
             // LineNumTxtBox
@@ -334,6 +340,28 @@ namespace LogParser
             this.btnParse.UseVisualStyleBackColor = true;
             this.btnParse.Click += new System.EventHandler(this.btnParse_Click);
             // 
+            // tabTable
+            // 
+            this.tabTable.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.tabTable.Controls.Add(this.gridView);
+            this.tabTable.Location = new System.Drawing.Point(4, 22);
+            this.tabTable.Name = "tabTable";
+            this.tabTable.Size = new System.Drawing.Size(886, 534);
+            this.tabTable.TabIndex = 2;
+            this.tabTable.Text = "Table";
+            // 
+            // gridView
+            // 
+            this.gridView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.gridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridView.Location = new System.Drawing.Point(0, 0);
+            this.gridView.Name = "gridView";
+            this.gridView.RowTemplate.Height = 23;
+            this.gridView.Size = new System.Drawing.Size(886, 534);
+            this.gridView.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AllowDrop = true;
@@ -363,6 +391,8 @@ namespace LogParser
             this.tabControl2.ResumeLayout(false);
             this.tabText.ResumeLayout(false);
             this.tabTree.ResumeLayout(false);
+            this.tabTable.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -391,6 +421,8 @@ namespace LogParser
         private Button btnUp;
         private Button btnDown;
         private Button btnParse;
+        private TabPage tabTable;
+        private DataGridView gridView;
     }
 }
 

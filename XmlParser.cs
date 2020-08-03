@@ -10,8 +10,9 @@ namespace LogParser
     class XmlParser
     {
         public List<List<String>> innerXml = new List<List<String>>();
+        public List<List<String>> innerName = new List<List<String>>();
         public List<String> innerAttr = new List<String>();
-        public List<String> childName = new List<String>();
+        public List<int> tableNum = new List<int>();
         public List<string[]> listString = new List<string[]>();
 
         public string[] attr;
@@ -31,10 +32,8 @@ namespace LogParser
                 }
                 listString.Add(line);
             }
-
             attr = listString[0];
 
-            
             for (int i = 1; i < listString.Count; i++)
             {
                 string[] s = listString[i];
@@ -56,26 +55,37 @@ namespace LogParser
                     {
                         Console.WriteLine(e);
                     }
+
                     XmlNodeList xnList = xml.GetElementsByTagName("Table");
-
-
-                    foreach (XmlNode node in xnList)
+                    if(xnList.Count == 0)
                     {
-                        XmlNodeList childList = node.ChildNodes;
+                        xnList = xml.GetElementsByTagName("table");
+                        if(xnList.Count == 0)
+                        {
+                            xnList = xml.GetElementsByTagName("NewDataset");
+                        }
+                    } // 다른 경우 있는지 확인 필요
+                    tableNum.Add(xnList.Count);
+
+                    for(int j=0; j<xnList.Count; j++)
+                    {
+                        XmlNodeList childList = xnList[j].ChildNodes;
                         List<String> text = new List<String>();
+                        List<String> name = new List<String>();
                         foreach (XmlNode childNode in childList)
                         {
-                            if (innerAttr.Count <= 5)
-                            {
-                                childName.Add(childNode.Name);
-                            }
+                            //if (innerAttr.Count <= 5) //용도?
+                            //{
+                            name.Add(childNode.Name);
+                            //}
                             text.Add(childNode.InnerText);
                         }
+                        innerName.Add(name);
                         innerXml.Add(text);
                     }
                 }
             }
             return innerXml;
-        }
+               }
     }
 }
