@@ -339,6 +339,8 @@ namespace LogParser
             // 
             // gridView
             // 
+            this.gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.gridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;

@@ -53,7 +53,7 @@ namespace LogParser
             FileDialog.FilterIndex = 1;
 
             // 다른 사용자의 컴퓨터 환경에 따르도록 처리
-            if(Properties.Settings.Default.PrevPath=="")
+            if (Properties.Settings.Default.PrevPath == "")
             {
                 FileDialog.InitialDirectory = Application.StartupPath;
             }
@@ -159,7 +159,7 @@ namespace LogParser
             {
                 // 로컬 정보를 가져와서 노드에 추가한다.
                 string[] drivers = Directory.GetLogicalDrives();
-                foreach(string drive in drivers)
+                foreach (string drive in drivers)
                 {
                     // 드라이버 명을 가져온다.
                     TreeNode root = new TreeNode(drive);
@@ -185,16 +185,16 @@ namespace LogParser
             try
             {
                 DirectoryInfo[] drivers = dir.GetDirectories();
-                foreach(DirectoryInfo drive in drivers)
+                foreach (DirectoryInfo drive in drivers)
                 {
                     // 디렉토리 명을 파라미터로 전달받은 상위 드라이버를 넣는다.
-                    TreeNode childRoot = new TreeNode(drive.Name);                
+                    TreeNode childRoot = new TreeNode(drive.Name);
 
                     root.Nodes.Add(childRoot);
 
                     // 처음 드라이버 검색을 제외한 디렉토리 검색일 때
                     // 하위 디렉토리 여부 검색
-                    if(isLoop)
+                    if (isLoop)
                     {
                         AddDirectoryNodes(childRoot, drive, false);
                     }
@@ -202,9 +202,9 @@ namespace LogParser
             }
             catch // 액세스 거부
             {
-                if(firstLoad==false) // !firstLoad true일 때 참 
+                if (firstLoad == false) // !firstLoad true일 때 참 
                 {
-                   // MessageBox.Show(ex.Message);
+                    // MessageBox.Show(ex.Message);
                 }
             }
         }
@@ -235,7 +235,7 @@ namespace LogParser
                 DirectoryInfo dir = new DirectoryInfo(fullPath);
                 FileInfo[] files = dir.GetFiles();
 
-                FileAttributes attr = File.GetAttributes(fullPath); 
+                FileAttributes attr = File.GetAttributes(fullPath);
                 foreach (FileInfo file in files)
                 {
                     ListViewItem item = new ListViewItem(file.Name);
@@ -267,7 +267,7 @@ namespace LogParser
             }
             g.DrawString(e.Item.Text, e.Item.Font, foregroundBrush, lView.GetItemRect(e.Item.Index).Location);
 
-            e.DrawFocusRectangle();     
+            e.DrawFocusRectangle();
         }
 
         private void tabControl2_Selected(object sender, TabControlEventArgs e)
@@ -294,16 +294,16 @@ namespace LogParser
             parser.xmlParsing(richTxtBox.Text); // 미리 text로 불러온 파일 파싱
 
             int index = 0;
-            for(int i=1; i<parser.listString.Count; i++)
+            for (int i = 1; i < parser.listString.Count; i++)
             {
                 if (parser.listString[i].Length == 5)
                 {
                     string[] s = parser.listString[i];
                     TreeNode node = new TreeNode(s[0]);
 
-                    for (int k = 1; k < parser.attr.Length-1; k++)
+                    for (int k = 1; k < parser.attr.Length - 1; k++)
                     {
-                        node.Nodes.Add(parser.attr[k] +": " + s[k]);
+                        node.Nodes.Add(parser.attr[k] + ": " + s[k]);
                     }
                     node.Nodes.Add(parser.attr[parser.attr.Length - 1]);
 
@@ -316,13 +316,13 @@ namespace LogParser
                     // for문으로 innerName, innerXml --> 두개 합쳐서 출력
                     // List<List<String>> innerName, innerXml;
                     int j;
-                    for (j=index; j<index+parser.tableNum[i-1]; j++)
+                    for (j = index; j < index + parser.tableNum[i - 1]; j++)
                     {
                         List<string> name = parser.innerName[j];
                         List<string> xml = parser.innerXml[j];
                         TreeNode childNode = new TreeNode();
 
-                        for(int k=0; k<name.Count; k++) 
+                        for (int k = 0; k < name.Count; k++)
                         {
                             childNode = new TreeNode(name[k] + ": " + xml[k]);
                             node.Nodes[3].Nodes.Add(childNode);
@@ -355,7 +355,7 @@ namespace LogParser
 
         private void ControlSearch()
         {
-            if((tabControl2.SelectedTab == tabText || tabControl2.SelectedTab == tabTable) && richTxtBox.Text != "")
+            if ((tabControl2.SelectedTab == tabText || tabControl2.SelectedTab == tabTable) && richTxtBox.Text != "")
             {
                 txtSearch.Visible = true;
                 btnSearch.Visible = true;
@@ -370,13 +370,13 @@ namespace LogParser
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            if(btnSearch.Text == "검색" && txtSearch.Text!="")
+            if (btnSearch.Text == "검색" && txtSearch.Text != "")
             {
-                if(tabControl2.SelectedTab == tabText)
+                if (tabControl2.SelectedTab == tabText)
                 {
                     SearchKeyword();
                 }
-                else if(tabControl2.SelectedTab == tabTable)
+                else if (tabControl2.SelectedTab == tabTable)
                 {
                     // table 안에서 키워드 검색
                     SearchRow();
@@ -391,8 +391,16 @@ namespace LogParser
                 else if (tabControl2.SelectedTab == tabTable)
                 {
                     // table 안에서 키워드 검색 마침
+                    EndSearchRow();
                 }
             }
+        }
+
+        private void EndSearchRow()
+        {
+            btnSearch.Text = "검색";
+
+            gridView.DataSource = table;
         }
 
         private void EndSearch()
@@ -438,6 +446,7 @@ namespace LogParser
             else
             {
                 gridView.DataSource = newTable;
+                btnSearch.Text = "마침";
             }
         }
 
@@ -516,7 +525,15 @@ namespace LogParser
         {
             if(e.KeyCode == Keys.Enter)
             {
-                SearchKeyword();
+                if (tabControl2.SelectedTab == tabText)
+                {
+                    SearchKeyword();
+                }
+                else if (tabControl2.SelectedTab == tabTable)
+                {
+                    // table 안에서 키워드 검색
+                    SearchRow();
+                }
             }
         }
 
@@ -590,6 +607,7 @@ namespace LogParser
         // text -> table
         private void btnParseTable_Click(object sender, EventArgs e)
         {
+            table = new DataTable();
             XmlParser parser = new XmlParser();
             parser.StringParsing(richTxtBox.Text); // 미리 text로 불러온 파일 속성 파싱
 
@@ -604,8 +622,6 @@ namespace LogParser
                 table.Rows.Add(parser.listString[i]);
             }
             gridView.DataSource = table;
-            gridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            gridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             MessageBox.Show("테이블로 파싱을 완료하였습니다!");
         }
