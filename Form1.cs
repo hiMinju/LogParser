@@ -17,12 +17,6 @@ namespace LogParser
 {
     public struct Location
     {
-        public Location(int start, int end)
-        {
-            this.start = start;
-            this.end = end;
-        }
-
         public int start { get; set; }
         public int end { get; set; }
     };
@@ -297,8 +291,7 @@ namespace LogParser
 
             // Node 추가
             XmlParser parser = new XmlParser();
-            List<List<string>> list = new List<List<string>>();
-            list = parser.StringParsing(richTxtBox.Text); // 미리 text로 불러온 파일 파싱
+            parser.xmlParsing(richTxtBox.Text); // 미리 text로 불러온 파일 파싱
 
             int index = 0;
             for(int i=1; i<parser.listString.Count; i++)
@@ -355,7 +348,6 @@ namespace LogParser
 
                 }
             }
-            
             // TreeView에 Node 추가가 완료되었으면 TreeView Component가 update될 수 있도록 함
             trvLog.EndUpdate();
 
@@ -363,7 +355,7 @@ namespace LogParser
 
         private void ControlSearch()
         {
-            if(tabControl2.SelectedTab == tabText && richTxtBox.Text != "")
+            if((tabControl2.SelectedTab == tabText || tabControl2.SelectedTab == tabTable) && richTxtBox.Text != "")
             {
                 txtSearch.Visible = true;
                 btnSearch.Visible = true;
@@ -380,11 +372,26 @@ namespace LogParser
         {
             if(btnSearch.Text == "검색" && txtSearch.Text!="")
             {
-                SearchKeyword();
+                if(tabControl2.SelectedTab == tabText)
+                {
+                    SearchKeyword();
+                }
+                else if(tabControl2.SelectedTab == tabTable)
+                {
+                    // table 안에서 키워드 검색
+                    SearchRow();
+                }
             }
             else // text가 마침일 때
             {
-                EndSearch();
+                if (tabControl2.SelectedTab == tabText)
+                {
+                    EndSearch();
+                }
+                else if (tabControl2.SelectedTab == tabTable)
+                {
+                    // table 안에서 키워드 검색 마침
+                }
             }
         }
 
@@ -402,10 +409,40 @@ namespace LogParser
             txtSearch.Text = "";
         }
 
+        private void SearchRow()
+        {
+            List<int> rowIndex = new List<int>();
+            Regex regex = new Regex(txtSearch.Text); //Regex 사용하여 특정문자 찾기
+            MatchCollection matches = regex.Matches(richTxtBox.Text);
+            DataTable newTable = new DataTable();
+
+            foreach (string s in header)
+            {
+                newTable.Columns.Add(s, typeof(string));
+            }
+
+            foreach (DataGridViewRow row in gridView.Rows)
+            {
+                if (row.Cells[4].Value != null && row.Cells[4].Value.ToString().Contains(txtSearch.Text))
+                {
+                    rowIndex.Add(row.Index);
+                    newTable.Rows.Add(row.Cells[0].Value, row.Cells[1].Value, row.Cells[2].Value, row.Cells[3].Value, row.Cells[4].Value);
+                }
+            }
+            if(rowIndex.Count == 0)
+            {
+                txtSearch.Text = "";
+                MessageBox.Show("찾으시려는 문자가 존재하지 않습니다!");
+                return;
+            }
+            else
+            {
+                gridView.DataSource = newTable;
+            }
+        }
+
         private void SearchKeyword()
         {
-            btnSearch.Text = "마침";
-
             // 키워드 검색 이벤트 처리
             string text = richTxtBox.Text;
 
@@ -416,12 +453,13 @@ namespace LogParser
                 MessageBox.Show("찾으시려는 문자가 존재하지 않습니다!");
                 return;
             }
+            btnSearch.Text = "마침";
 
             Regex regex = new Regex(txtSearch.Text); //Regex 사용하여 특정문자 찾기
             MatchCollection matches = regex.Matches(richTxtBox.Text);
 
             int iCursorPosition = richTxtBox.SelectionStart;
-            Location point = new LogParser.Location();
+            Location point = new Location();
 
             foreach (Match m in matches)
             {
@@ -436,7 +474,7 @@ namespace LogParser
                 richTxtBox.SelectionStart = iCursorPosition;
                 richTxtBox.SelectionColor = Color.Black;
             }
-            MessageBox.Show(locations.Count.ToString());
+            MessageBox.Show(locations.Count.ToString()+ "개를 찾았습니다!");
         }
 
         // 찾은 키워드 이동하며 찾기
@@ -537,7 +575,7 @@ namespace LogParser
             if (richTxtBox.Text.StartsWith("#"))
             {
                 MessageBox.Show("파싱할 수 있는 파일이 아닙니다!");
-                return;
+                return; 
             }
             // treview 호출
             if (richTxtBox.Text != "") // 조건 더 추가 필요
@@ -545,6 +583,31 @@ namespace LogParser
                 LoadXmlTree();
                 MessageBox.Show("파싱을 완료하였습니다!");
             }
+        }
+
+        private DataTable table = new DataTable();
+        private string[] header;
+        // text -> table
+        private void btnParseTable_Click(object sender, EventArgs e)
+        {
+            XmlParser parser = new XmlParser();
+            parser.StringParsing(richTxtBox.Text); // 미리 text로 불러온 파일 속성 파싱
+
+            header = parser.attr;
+            foreach(string s in header)
+            {
+                table.Columns.Add(s, typeof(string));
+            }
+
+            for(int i=1; i<parser.listString.Count; i++)
+            {
+                table.Rows.Add(parser.listString[i]);
+            }
+            gridView.DataSource = table;
+            gridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            gridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
+            MessageBox.Show("테이블로 파싱을 완료하였습니다!");
         }
     }
 }
