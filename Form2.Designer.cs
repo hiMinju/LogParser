@@ -44,6 +44,7 @@
             this.GridView.Location = new System.Drawing.Point(0, 0);
             this.GridView.Name = "GridView";
             this.GridView.ReadOnly = true;
+            this.GridView.RowHeadersVisible = false;
             this.GridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.GridView.RowsDefaultCellStyle = dataGridViewCellStyle1;

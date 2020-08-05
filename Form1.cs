@@ -323,14 +323,6 @@ namespace LogParser
                     }
                     node.Nodes.Add(parser.attr[parser.attr.Length - 1]);
 
-                    //for (int j=1; j<s.Length-1; j++)
-                    //{
-                    //    node.Nodes[j - 1].Nodes.Add(s[j]);
-                    //}
-
-                    // node.Nodes[s.Length].Add() --> xml 관련 추가
-                    // for문으로 innerName, innerXml --> 두개 합쳐서 출력
-                    // List<List<String>> innerName, innerXml;
                     int j;
                     for (j = index; j < index + parser.tableNum[i - 1]; j++)
                     {
@@ -352,7 +344,6 @@ namespace LogParser
             }
             // TreeView에 Node 추가가 완료되었으면 TreeView Component가 update될 수 있도록 함
             trvLog.EndUpdate();
-
         }
 
         private void ControlSearch()
@@ -612,7 +603,7 @@ namespace LogParser
             }
         }
 
-        private DataTable table = new DataTable();
+        private DataTable table = null;
         private string[] header;
         // text -> table
         private void btnParseTable_Click(object sender, EventArgs e)

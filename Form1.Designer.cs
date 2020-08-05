@@ -347,6 +347,7 @@ namespace LogParser
             this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridView.Location = new System.Drawing.Point(0, 0);
             this.gridView.Name = "gridView";
+            this.gridView.ReadOnly = true;
             this.gridView.RowHeadersWidth = 30;
             this.gridView.RowTemplate.Height = 23;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;

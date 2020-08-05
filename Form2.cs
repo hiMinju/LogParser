@@ -20,20 +20,15 @@ namespace LogParser
 
             DataTable table = new DataTable();
 
-            table.Columns.Add("Value");
+            table.Columns.Add("attribute");
+            table.Columns.Add("value");
 
-            table.Rows.Add(row.Cells[0].Value);
-            table.Rows.Add(row.Cells[1].Value);
-            table.Rows.Add(row.Cells[2].Value);
-            table.Rows.Add(row.Cells[3].Value);
+            table.Rows.Add("Calling Date/Time", row.Cells[0].Value);
+            table.Rows.Add("Client IP", row.Cells[1].Value);
+            table.Rows.Add("Calling WebMethod", row.Cells[2].Value);
+            table.Rows.Add("Type",row.Cells[3].Value);
 
             GridView.DataSource = table;
-
-            // 나중에 추가 ==> 정상적으로 작동 안 함 이유??
-            GridView.Rows[0].HeaderCell.Value = "Calling Date/Time";
-            GridView.Rows[1].HeaderCell.Value = "Client IP";
-            GridView.Rows[2].HeaderCell.Value = "Calling WebMethod";
-            GridView.Rows[3].HeaderCell.Value = "Type";
 
             XmlParser xmlParser = new XmlParser();
 
@@ -46,8 +41,7 @@ namespace LogParser
                 List<string> xml = xmlParser.innerXml[i];
 
                 for (int j = 0; j < name.Count; j++) {
-                    table.Rows.Add(xml[j]);
-                    GridView.Rows[4 + i * name.Count + j].HeaderCell.Value = name[j];
+                    table.Rows.Add(name[j], xml[j]);
                 }
             }
         }
