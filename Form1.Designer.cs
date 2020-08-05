@@ -349,8 +349,10 @@ namespace LogParser
             this.gridView.Name = "gridView";
             this.gridView.RowHeadersWidth = 30;
             this.gridView.RowTemplate.Height = 23;
+            this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.gridView.Size = new System.Drawing.Size(886, 534);
             this.gridView.TabIndex = 0;
+            this.gridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridView_CellMouseDoubleClick);
             // 
             // tabTree
             // 

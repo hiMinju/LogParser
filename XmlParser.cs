@@ -131,16 +131,52 @@ namespace LogParser
                         List<String> name = new List<String>();
                         foreach (XmlNode childNode in childList)
                         {
-                            //if (innerAttr.Count <= 5) //용도?
-                            //{
                             name.Add(childNode.Name);
-                            //}
                             text.Add(childNode.InnerText);
                         }
                         innerName.Add(name);
                         innerXml.Add(text);
                     }
                 }
+            }
+        }
+
+        public void parsing(string StringXml)
+        {
+            XmlDocument xml = new XmlDocument(); // XmlDocument 생성
+
+            try
+            {
+                xml.LoadXml(StringXml);
+            }
+            catch (XmlException e)
+            {
+                Console.WriteLine(e);
+            }
+
+            XmlNodeList xnList = xml.GetElementsByTagName("Table");
+            if (xnList.Count == 0)
+            {
+                xnList = xml.GetElementsByTagName("table");
+                if (xnList.Count == 0)
+                {
+                    xnList = xml.GetElementsByTagName("NewDataset");
+                }
+            } // 다른 경우 있는지 확인 필요
+            tableNum.Add(xnList.Count);
+
+            for (int j = 0; j < xnList.Count; j++)
+            {
+                XmlNodeList childList = xnList[j].ChildNodes;
+                List<String> text = new List<String>();
+                List<String> name = new List<String>();
+                foreach (XmlNode childNode in childList)
+                {
+                    name.Add(childNode.Name);
+                    text.Add(childNode.InnerText);
+                }
+                innerName.Add(name);
+                innerXml.Add(text);
             }
         }
     }

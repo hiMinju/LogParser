@@ -42,7 +42,7 @@ namespace LogParser
             // 행번호 관련
             LineNumTxtBox.Font = richTxtBox.Font;
 
-            //// 탐색기 관련
+            // 탐색기 관련
             LoadDirectory();
         }
 
@@ -158,6 +158,21 @@ namespace LogParser
             try
             {
                 // 로컬 정보를 가져와서 노드에 추가한다.
+                string driver = "C:\\Neozensoft";
+
+                TreeNode root = new TreeNode(driver);
+                trvDir.Nodes.Add(root);
+
+                DirectoryInfo dir = new DirectoryInfo(driver);
+
+                if (dir.Exists)
+                {
+                    AddDirectoryNodes(root, dir, false);
+                }
+            }
+            catch
+            {
+                // 로컬 정보를 가져와서 노드에 추가한다.
                 string[] drivers = Directory.GetLogicalDrives();
                 foreach (string drive in drivers)
                 {
@@ -173,10 +188,6 @@ namespace LogParser
                         AddDirectoryNodes(root, dir, false);
                     }
                 }
-            }
-            catch
-            {
-                throw;
             }
         }
 
@@ -281,6 +292,11 @@ namespace LogParser
                 btnDown.Visible = false;
                 btnUp.Visible = false;
             }
+            else if (tabControl2.SelectedTab == tabTable)
+            {
+                btnDown.Visible = false;
+                btnUp.Visible = false;
+            }
         }
 
         private void LoadXmlTree()
@@ -332,20 +348,6 @@ namespace LogParser
                     index = j;
 
                     trvLog.Nodes.Add(node);
-
-
-                    //List<string> xml = parser.innerXml[i-1];
-
-                    //for (int j = 0; j < parser.childName.Count; j++)
-                    //{
-                    //    TreeNode childNode = new TreeNode(parser.childName[j]);
-                    //    //childNode.Nodes.Add(parser.attr[j]);
-
-                    //    childNode.Nodes.Add(xml[j]);
-                    //    childNode.Nodes.Add(xml[j]);
-                    //    node.Nodes[s.Length - 2].Nodes.Add(childNode);
-                    //}
-
                 }
             }
             // TreeView에 Node 추가가 완료되었으면 TreeView Component가 update될 수 있도록 함
@@ -355,12 +357,20 @@ namespace LogParser
 
         private void ControlSearch()
         {
-            if ((tabControl2.SelectedTab == tabText || tabControl2.SelectedTab == tabTable) && richTxtBox.Text != "")
+            if (richTxtBox.Text != "")
             {
-                txtSearch.Visible = true;
-                btnSearch.Visible = true;
-                btnDown.Visible = true;
-                btnUp.Visible = true;
+                if(tabControl2.SelectedTab == tabText)
+                {
+                    txtSearch.Visible = true;
+                    btnSearch.Visible = true;
+                    btnDown.Visible = true;
+                    btnUp.Visible = true;
+                }
+                else if(tabControl2.SelectedTab == tabTable)
+                {
+                    txtSearch.Visible = true;
+                    btnSearch.Visible = true;
+                }
             }
             else if (txtSearch.Text != "")
             {
@@ -399,7 +409,7 @@ namespace LogParser
         private void EndSearchRow()
         {
             btnSearch.Text = "검색";
-
+            txtSearch.Text = "";
             gridView.DataSource = table;
         }
 
@@ -607,6 +617,8 @@ namespace LogParser
         // text -> table
         private void btnParseTable_Click(object sender, EventArgs e)
         {
+            if (richTxtBox.Text == "")
+                return;
             table = new DataTable();
             XmlParser parser = new XmlParser();
             parser.StringParsing(richTxtBox.Text); // 미리 text로 불러온 파일 속성 파싱
@@ -624,6 +636,17 @@ namespace LogParser
             gridView.DataSource = table;
 
             MessageBox.Show("테이블로 파싱을 완료하였습니다!");
+        }
+
+        // dataGridView에서 셀을 마우스로 더블 클릭할 때 event 발생
+        private void gridView_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow row = gridView.Rows[e.RowIndex];
+            Form2 form2 = new Form2(row)
+            {
+                Owner = this
+            };
+            form2.Show();
         }
     }
 }
