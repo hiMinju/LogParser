@@ -39,27 +39,26 @@
             this.GridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.GridView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
             this.GridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GridView.ColumnHeadersVisible = false;
             this.GridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GridView.Location = new System.Drawing.Point(0, 0);
             this.GridView.Name = "GridView";
             this.GridView.ReadOnly = true;
-            this.GridView.RowHeadersVisible = false;
             this.GridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.GridView.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.GridView.RowTemplate.Height = 23;
-            this.GridView.Size = new System.Drawing.Size(625, 293);
+            this.GridView.Size = new System.Drawing.Size(676, 353);
             this.GridView.TabIndex = 0;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(625, 293);
+            this.ClientSize = new System.Drawing.Size(676, 353);
             this.Controls.Add(this.GridView);
             this.Name = "Form2";
             this.Text = "Xml";
+            this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GridView)).EndInit();
             this.ResumeLayout(false);
 

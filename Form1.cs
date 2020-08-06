@@ -605,14 +605,17 @@ namespace LogParser
 
         private DataTable table = null;
         private string[] header;
+        private List<DataTable> tables = new List<DataTable>();
+        BindingSource customersBindingSource = new BindingSource();
         // text -> table
         private void btnParseTable_Click(object sender, EventArgs e)
         {
             if (richTxtBox.Text == "")
                 return;
-            table = new DataTable();
+            
             XmlParser parser = new XmlParser();
             parser.StringParsing(richTxtBox.Text); // 미리 text로 불러온 파일 속성 파싱
+            table = new DataTable();
 
             header = parser.attr;
             foreach(string s in header)
@@ -620,11 +623,27 @@ namespace LogParser
                 table.Columns.Add(s, typeof(string));
             }
 
-            for(int i=1; i<parser.listString.Count; i++)
+            this.BindingNavi.BindingSource = this.customersBindingSource;
+
+            for (int i = 0; i <= parser.listString.Count / 21; i++)
             {
-                table.Rows.Add(parser.listString[i]);
+                for (int j=1; j<22; j++)
+                {
+                    if(parser.listString.Count > i*21+j)
+                        table.Rows.Add(parser.listString[i * 21 + j]);
+                }
+                tables.Add(table);
+                table = new DataTable();
+                header = parser.attr;
+                foreach (string s in header)
+                {
+                    table.Columns.Add(s, typeof(string));
+                }
             }
-            gridView.DataSource = table;
+            this.customersBindingSource.DataSource = tables;
+            NaviCount.Text = tables.Count.ToString();
+
+            gridView.DataSource = tables[0];
 
             MessageBox.Show("테이블로 파싱을 완료하였습니다!");
         }
@@ -638,6 +657,29 @@ namespace LogParser
                 Owner = this
             };
             form2.Show();
+        }
+
+        private void bindingNavigatorMoveFirstItem_Click(object sender, EventArgs e)
+        {
+            if(NaviPos.Text != "0")
+            {
+                gridView.DataSource = tables[0];
+            }
+        }
+
+        private void bindingNavigatorMovePreviousItem_Click(object sender, EventArgs e)
+        {
+            gridView.DataSource = tables[Int32.Parse(NaviPos.Text)-1];
+        }
+
+        private void bindingNavigatorMoveNextItem_Click(object sender, EventArgs e)
+        {  
+            gridView.DataSource = tables[Int32.Parse(NaviPos.Text)-1];
+        }
+
+        private void bindingNavigatorMoveLastItem_Click(object sender, EventArgs e)
+        {
+            gridView.DataSource = tables[tables.Count-1];
         }
     }
 }

@@ -30,6 +30,8 @@ namespace LogParser
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel3 = new System.Windows.Forms.Panel();
             this.btnDown = new System.Windows.Forms.Button();
             this.btnUp = new System.Windows.Forms.Button();
@@ -52,10 +54,23 @@ namespace LogParser
             this.richTxtBox = new System.Windows.Forms.RichTextBox();
             this.LineNumTxtBox = new System.Windows.Forms.RichTextBox();
             this.tabTable = new System.Windows.Forms.TabPage();
-            this.gridView = new System.Windows.Forms.DataGridView();
             this.tabTree = new System.Windows.Forms.TabPage();
             this.trvLog = new System.Windows.Forms.TreeView();
             this.FileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.gridView = new System.Windows.Forms.DataGridView();
+            this.BindingNavi = new System.Windows.Forms.BindingNavigator(this.components);
+            this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.NaviPos = new System.Windows.Forms.ToolStripTextBox();
+            this.NaviCount = new System.Windows.Forms.ToolStripLabel();
+            this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
+            this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -69,8 +84,13 @@ namespace LogParser
             this.tabControl2.SuspendLayout();
             this.tabText.SuspendLayout();
             this.tabTable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.tabTree.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingNavi)).BeginInit();
+            this.BindingNavi.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -330,30 +350,13 @@ namespace LogParser
             // tabTable
             // 
             this.tabTable.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.tabTable.Controls.Add(this.gridView);
+            this.tabTable.Controls.Add(this.panel2);
+            this.tabTable.Controls.Add(this.panel1);
             this.tabTable.Location = new System.Drawing.Point(4, 22);
             this.tabTable.Name = "tabTable";
             this.tabTable.Size = new System.Drawing.Size(886, 534);
             this.tabTable.TabIndex = 2;
             this.tabTable.Text = "Table";
-            // 
-            // gridView
-            // 
-            this.gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.gridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.gridView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.gridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridView.Location = new System.Drawing.Point(0, 0);
-            this.gridView.Name = "gridView";
-            this.gridView.ReadOnly = true;
-            this.gridView.RowHeadersWidth = 30;
-            this.gridView.RowTemplate.Height = 23;
-            this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(886, 534);
-            this.gridView.TabIndex = 0;
-            this.gridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridView_CellMouseDoubleClick);
             // 
             // tabTree
             // 
@@ -379,6 +382,142 @@ namespace LogParser
             // FileDialog
             // 
             this.FileDialog.FileName = "openFileDialog1";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.BindingNavi);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(886, 29);
+            this.panel1.TabIndex = 1;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.gridView);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 29);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(886, 505);
+            this.panel2.TabIndex = 2;
+            // 
+            // gridView
+            // 
+            this.gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.gridView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.gridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridView.Location = new System.Drawing.Point(0, 0);
+            this.gridView.Name = "gridView";
+            this.gridView.ReadOnly = true;
+            this.gridView.RowHeadersWidth = 30;
+            this.gridView.RowTemplate.Height = 23;
+            this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridView.Size = new System.Drawing.Size(886, 505);
+            this.gridView.TabIndex = 1;
+            this.gridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridView_CellMouseDoubleClick);
+            // 
+            // BindingNavi
+            // 
+            this.BindingNavi.AddNewItem = this.bindingNavigatorMoveFirstItem;
+            this.BindingNavi.CountItem = this.NaviCount;
+            this.BindingNavi.DeleteItem = null;
+            this.BindingNavi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BindingNavi.GripMargin = new System.Windows.Forms.Padding(680, 2, 2, 2);
+            this.BindingNavi.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.NaviPos,
+            this.NaviCount,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2});
+            this.BindingNavi.Location = new System.Drawing.Point(0, 0);
+            this.BindingNavi.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.BindingNavi.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.BindingNavi.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.BindingNavi.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.BindingNavi.Name = "BindingNavi";
+            this.BindingNavi.PositionItem = this.NaviPos;
+            this.BindingNavi.Size = new System.Drawing.Size(886, 29);
+            this.BindingNavi.TabIndex = 0;
+            this.BindingNavi.Text = "bindingNavigator1";
+            // 
+            // bindingNavigatorMoveFirstItem
+            // 
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 26);
+            this.bindingNavigatorMoveFirstItem.Text = "처음으로 이동";
+            this.bindingNavigatorMoveFirstItem.Click += new System.EventHandler(this.bindingNavigatorMoveFirstItem_Click);
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 26);
+            this.bindingNavigatorMovePreviousItem.Text = "이전으로 이동";
+            this.bindingNavigatorMovePreviousItem.Click += new System.EventHandler(this.bindingNavigatorMovePreviousItem_Click);
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 29);
+            // 
+            // NaviPos
+            // 
+            this.NaviPos.AccessibleName = "위치";
+            this.NaviPos.AutoSize = false;
+            this.NaviPos.Font = new System.Drawing.Font("맑은 고딕", 9F);
+            this.NaviPos.Name = "bindingNavigatorPositionItem";
+            this.NaviPos.Size = new System.Drawing.Size(50, 23);
+            this.NaviPos.Text = "0";
+            this.NaviPos.ToolTipText = "현재 위치";
+            // 
+            // NaviCount
+            // 
+            this.NaviCount.Name = "bindingNavigatorCountItem";
+            this.NaviCount.Size = new System.Drawing.Size(27, 26);
+            this.NaviCount.Text = "/{0}";
+            this.NaviCount.ToolTipText = "전체 항목 수";
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 29);
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 26);
+            this.bindingNavigatorMoveNextItem.Text = "다음으로 이동";
+            this.bindingNavigatorMoveNextItem.Click += new System.EventHandler(this.bindingNavigatorMoveNextItem_Click);
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 20);
+            this.bindingNavigatorMoveLastItem.Text = "마지막으로 이동";
+            this.bindingNavigatorMoveLastItem.Click += new System.EventHandler(this.bindingNavigatorMoveLastItem_Click);
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 29);
             // 
             // Form1
             // 
@@ -409,8 +548,15 @@ namespace LogParser
             this.tabControl2.ResumeLayout(false);
             this.tabText.ResumeLayout(false);
             this.tabTable.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.tabTree.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingNavi)).EndInit();
+            this.BindingNavi.ResumeLayout(false);
+            this.BindingNavi.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -440,8 +586,21 @@ namespace LogParser
         private Button btnDown;
         private Button btnParseTree;
         private TabPage tabTable;
-        private DataGridView gridView;
         private Button btnParseTable;
+        private Panel panel2;
+        private DataGridView gridView;
+        private Panel panel1;
+        private BindingNavigator BindingNavi;
+        private ToolStripButton bindingNavigatorMoveFirstItem;
+        private ToolStripLabel NaviCount;
+        private ToolStripButton bindingNavigatorMovePreviousItem;
+        private ToolStripSeparator bindingNavigatorSeparator;
+        private ToolStripTextBox NaviPos;
+        private ToolStripSeparator bindingNavigatorSeparator1;
+        private ToolStripButton bindingNavigatorMoveNextItem;
+        private ToolStripButton bindingNavigatorMoveLastItem;
+        private ToolStripSeparator bindingNavigatorSeparator2;
+        private BindingSource bindingSource1;
     }
 }
 
