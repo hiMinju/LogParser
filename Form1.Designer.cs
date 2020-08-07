@@ -71,6 +71,7 @@ namespace LogParser
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.btnInit = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -95,6 +96,7 @@ namespace LogParser
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.btnInit);
             this.panel3.Controls.Add(this.btnDown);
             this.panel3.Controls.Add(this.btnUp);
             this.panel3.Controls.Add(this.btnSearch);
@@ -481,6 +483,7 @@ namespace LogParser
             this.NaviPos.Size = new System.Drawing.Size(50, 23);
             this.NaviPos.Text = "0";
             this.NaviPos.ToolTipText = "현재 위치";
+            this.NaviPos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NaviPos_KeyDown);
             // 
             // NaviCount
             // 
@@ -510,7 +513,7 @@ namespace LogParser
             this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
             this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 20);
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 26);
             this.bindingNavigatorMoveLastItem.Text = "마지막으로 이동";
             this.bindingNavigatorMoveLastItem.Click += new System.EventHandler(this.bindingNavigatorMoveLastItem_Click);
             // 
@@ -518,6 +521,17 @@ namespace LogParser
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 29);
+            // 
+            // btnInit
+            // 
+            this.btnInit.Location = new System.Drawing.Point(1127, 4);
+            this.btnInit.Name = "btnInit";
+            this.btnInit.Size = new System.Drawing.Size(75, 23);
+            this.btnInit.TabIndex = 7;
+            this.btnInit.Text = "초기화";
+            this.btnInit.UseVisualStyleBackColor = true;
+            this.btnInit.Visible = false;
+            this.btnInit.Click += new System.EventHandler(this.btnInit_Click);
             // 
             // Form1
             // 
@@ -601,6 +615,7 @@ namespace LogParser
         private ToolStripButton bindingNavigatorMoveLastItem;
         private ToolStripSeparator bindingNavigatorSeparator2;
         private BindingSource bindingSource1;
+        private Button btnInit;
     }
 }
 

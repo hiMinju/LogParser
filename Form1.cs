@@ -430,15 +430,18 @@ namespace LogParser
                 newTable.Columns.Add(s, typeof(string));
             }
 
-            foreach (DataGridViewRow row in gridView.Rows)
+            foreach (DataTable t in tables)
             {
-                if (row.Cells[4].Value != null && row.Cells[4].Value.ToString().Contains(txtSearch.Text))
+                foreach(DataRow r in t.Rows)
                 {
-                    rowIndex.Add(row.Index);
-                    newTable.Rows.Add(row.Cells[0].Value, row.Cells[1].Value, row.Cells[2].Value, row.Cells[3].Value, row.Cells[4].Value);
+                    if(r[4] != null && r[4].ToString().Contains(txtSearch.Text))
+                    {
+                        newTable.Rows.Add(r[0], r[1], r[2], r[3], r[4]);
+                    }
                 }
             }
-            if(rowIndex.Count == 0)
+
+            if(newTable.Rows.Count == 0)
             {
                 txtSearch.Text = "";
                 MessageBox.Show("찾으시려는 문자가 존재하지 않습니다!");
@@ -447,8 +450,30 @@ namespace LogParser
             else
             {
                 gridView.DataSource = newTable;
-                btnSearch.Text = "마침";
+                btnInit.Visible = true;
+                BindingNavi.Enabled = false;
             }
+
+            //foreach (DataGridViewRow row in gridView.Rows)
+            //{
+            //    if (row.Cells[4].Value != null && row.Cells[4].Value.ToString().Contains(txtSearch.Text))
+            //    {
+            //        rowIndex.Add(row.Index);
+            //        newTable.Rows.Add(row.Cells[0].Value, row.Cells[1].Value, row.Cells[2].Value, row.Cells[3].Value, row.Cells[4].Value);
+            //    }
+            //}
+            //if(rowIndex.Count == 0)
+            //{
+            //    txtSearch.Text = "";
+            //    MessageBox.Show("찾으시려는 문자가 존재하지 않습니다!");
+            //    return;
+            //}
+            //else
+            //{
+            //    gridView.DataSource = newTable;
+            //    btnInit.Visible = true;
+            //    BindingNavi.Enabled = false;
+            //}
         }
 
         private void SearchKeyword()
@@ -680,6 +705,25 @@ namespace LogParser
         private void bindingNavigatorMoveLastItem_Click(object sender, EventArgs e)
         {
             gridView.DataSource = tables[tables.Count-1];
+        }
+        // 검색 항목 초기화
+        private void btnInit_Click(object sender, EventArgs e)
+        {
+            // 저장해둔 tables 실행
+
+            btnInit.Visible = false;
+            BindingNavi.Enabled = true;
+
+            gridView.DataSource = tables[Int32.Parse(NaviPos.Text) - 1];
+            txtSearch.Text = "";
+        }
+
+        private void NaviPos_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && Int32.Parse(NaviPos.Text) > 0 && Int32.Parse(NaviPos.Text) < tables.Count)
+            {
+                gridView.DataSource = tables[Int32.Parse(NaviPos.Text) - 1];
+            }
         }
     }
 }
