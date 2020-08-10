@@ -32,21 +32,8 @@ namespace LogParser
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnDown = new System.Windows.Forms.Button();
-            this.btnUp = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnFolderDlg = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.txtPath = new System.Windows.Forms.TextBox();
-            this.lblPath = new System.Windows.Forms.Label();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.trvDir = new System.Windows.Forms.TreeView();
-            this.lView = new System.Windows.Forms.ListView();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.FileDialog = new System.Windows.Forms.OpenFileDialog();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabText = new System.Windows.Forms.TabPage();
             this.btnParseTable = new System.Windows.Forms.Button();
@@ -54,179 +41,309 @@ namespace LogParser
             this.richTxtBox = new System.Windows.Forms.RichTextBox();
             this.LineNumTxtBox = new System.Windows.Forms.RichTextBox();
             this.tabTable = new System.Windows.Forms.TabPage();
-            this.tabTree = new System.Windows.Forms.TabPage();
-            this.trvLog = new System.Windows.Forms.TreeView();
-            this.FileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gridView = new System.Windows.Forms.DataGridView();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.BindingNavi = new System.Windows.Forms.BindingNavigator(this.components);
+            this.NaviCount = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.NaviPos = new System.Windows.Forms.ToolStripTextBox();
-            this.NaviCount = new System.Windows.Forms.ToolStripLabel();
             this.bindingNavigatorSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.tabTree = new System.Windows.Forms.TabPage();
+            this.trvLog = new System.Windows.Forms.TreeView();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.trvDir = new System.Windows.Forms.TreeView();
+            this.lView = new System.Windows.Forms.ListView();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.lblPath = new System.Windows.Forms.Label();
+            this.txtPath = new System.Windows.Forms.TextBox();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnFolderDlg = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnUp = new System.Windows.Forms.Button();
+            this.btnDown = new System.Windows.Forms.Button();
             this.btnInit = new System.Windows.Forms.Button();
-            this.panel3.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.panel3 = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            this.tabControl2.SuspendLayout();
+            this.tabText.SuspendLayout();
+            this.tabTable.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingNavi)).BeginInit();
+            this.BindingNavi.SuspendLayout();
+            this.tabTree.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.tabText.SuspendLayout();
-            this.tabTable.SuspendLayout();
-            this.tabTree.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BindingNavi)).BeginInit();
-            this.BindingNavi.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel3
+            // FileDialog
             // 
-            this.panel3.Controls.Add(this.btnInit);
-            this.panel3.Controls.Add(this.btnDown);
-            this.panel3.Controls.Add(this.btnUp);
-            this.panel3.Controls.Add(this.btnSearch);
-            this.panel3.Controls.Add(this.txtSearch);
-            this.panel3.Controls.Add(this.btnFolderDlg);
-            this.panel3.Controls.Add(this.tabControl1);
-            this.panel3.Controls.Add(this.txtPath);
-            this.panel3.Controls.Add(this.lblPath);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1283, 62);
-            this.panel3.TabIndex = 1;
+            this.FileDialog.FileName = "openFileDialog1";
             // 
-            // btnDown
+            // tabControl2
             // 
-            this.btnDown.Font = new System.Drawing.Font("굴림", 8F);
-            this.btnDown.Location = new System.Drawing.Point(1220, 44);
-            this.btnDown.Name = "btnDown";
-            this.btnDown.Size = new System.Drawing.Size(51, 18);
-            this.btnDown.TabIndex = 6;
-            this.btnDown.Text = "DOWN";
-            this.btnDown.UseVisualStyleBackColor = true;
-            this.btnDown.Visible = false;
-            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
+            this.tabControl2.Controls.Add(this.tabText);
+            this.tabControl2.Controls.Add(this.tabTable);
+            this.tabControl2.Controls.Add(this.tabTree);
+            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl2.Location = new System.Drawing.Point(0, 0);
+            this.tabControl2.Name = "tabControl2";
+            this.tabControl2.SelectedIndex = 0;
+            this.tabControl2.Size = new System.Drawing.Size(894, 560);
+            this.tabControl2.TabIndex = 0;
+            this.tabControl2.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl2_Selected);
             // 
-            // btnUp
+            // tabText
             // 
-            this.btnUp.Location = new System.Drawing.Point(1220, 20);
-            this.btnUp.Name = "btnUp";
-            this.btnUp.Size = new System.Drawing.Size(51, 18);
-            this.btnUp.TabIndex = 5;
-            this.btnUp.Text = "UP";
-            this.btnUp.UseVisualStyleBackColor = true;
-            this.btnUp.Visible = false;
-            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
+            this.tabText.Controls.Add(this.btnParseTable);
+            this.tabText.Controls.Add(this.btnParseTree);
+            this.tabText.Controls.Add(this.richTxtBox);
+            this.tabText.Controls.Add(this.LineNumTxtBox);
+            this.tabText.Location = new System.Drawing.Point(4, 22);
+            this.tabText.Name = "tabText";
+            this.tabText.Padding = new System.Windows.Forms.Padding(3);
+            this.tabText.Size = new System.Drawing.Size(886, 534);
+            this.tabText.TabIndex = 0;
+            this.tabText.Text = "Text";
+            this.tabText.UseVisualStyleBackColor = true;
             // 
-            // btnSearch
+            // btnParseTable
             // 
-            this.btnSearch.Location = new System.Drawing.Point(1127, 33);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 4;
-            this.btnSearch.Text = "검색";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Visible = false;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            this.btnParseTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnParseTable.Location = new System.Drawing.Point(630, 485);
+            this.btnParseTable.Name = "btnParseTable";
+            this.btnParseTable.Size = new System.Drawing.Size(114, 23);
+            this.btnParseTable.TabIndex = 4;
+            this.btnParseTable.Text = "Table Parsing";
+            this.btnParseTable.UseVisualStyleBackColor = true;
+            this.btnParseTable.Click += new System.EventHandler(this.btnParseTable_Click);
             // 
-            // txtSearch
+            // btnParseTree
             // 
-            this.txtSearch.Location = new System.Drawing.Point(984, 35);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(137, 21);
-            this.txtSearch.TabIndex = 3;
-            this.txtSearch.Visible = false;
-            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            this.btnParseTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnParseTree.Location = new System.Drawing.Point(750, 485);
+            this.btnParseTree.Name = "btnParseTree";
+            this.btnParseTree.Size = new System.Drawing.Size(114, 23);
+            this.btnParseTree.TabIndex = 3;
+            this.btnParseTree.Text = "Tree ViewParsing";
+            this.btnParseTree.UseVisualStyleBackColor = true;
+            this.btnParseTree.Click += new System.EventHandler(this.btnParse_Click);
             // 
-            // btnFolderDlg
+            // richTxtBox
             // 
-            this.btnFolderDlg.Location = new System.Drawing.Point(921, 20);
-            this.btnFolderDlg.Name = "btnFolderDlg";
-            this.btnFolderDlg.Size = new System.Drawing.Size(28, 23);
-            this.btnFolderDlg.TabIndex = 2;
-            this.btnFolderDlg.Text = "...";
-            this.btnFolderDlg.UseVisualStyleBackColor = true;
-            this.btnFolderDlg.Click += new System.EventHandler(this.button1_Click);
+            this.richTxtBox.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.richTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTxtBox.Location = new System.Drawing.Point(69, 3);
+            this.richTxtBox.Name = "richTxtBox";
+            this.richTxtBox.ReadOnly = true;
+            this.richTxtBox.Size = new System.Drawing.Size(814, 528);
+            this.richTxtBox.TabIndex = 2;
+            this.richTxtBox.Text = "";
+            this.richTxtBox.WordWrap = false;
+            this.richTxtBox.VScroll += new System.EventHandler(this.myRichTextBox1_VScroll);
             // 
-            // tabControl1
+            // LineNumTxtBox
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(316, 62);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(662, 530);
-            this.tabControl1.TabIndex = 1;
+            this.LineNumTxtBox.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.LineNumTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.LineNumTxtBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.LineNumTxtBox.ForeColor = System.Drawing.Color.Blue;
+            this.LineNumTxtBox.Location = new System.Drawing.Point(3, 3);
+            this.LineNumTxtBox.Name = "LineNumTxtBox";
+            this.LineNumTxtBox.ReadOnly = true;
+            this.LineNumTxtBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.LineNumTxtBox.Size = new System.Drawing.Size(66, 528);
+            this.LineNumTxtBox.TabIndex = 1;
+            this.LineNumTxtBox.Text = "";
+            this.LineNumTxtBox.Enter += new System.EventHandler(this.LineNumTxtBox_Enter);
             // 
-            // tabPage1
+            // tabTable
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(654, 504);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabTable.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.tabTable.Controls.Add(this.panel2);
+            this.tabTable.Controls.Add(this.panel1);
+            this.tabTable.Location = new System.Drawing.Point(4, 22);
+            this.tabTable.Name = "tabTable";
+            this.tabTable.Size = new System.Drawing.Size(886, 534);
+            this.tabTable.TabIndex = 2;
+            this.tabTable.Text = "Table";
             // 
-            // tabPage2
+            // panel2
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(654, 504);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.panel2.Controls.Add(this.gridView);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 29);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(886, 505);
+            this.panel2.TabIndex = 2;
             // 
-            // txtPath
+            // gridView
             // 
-            this.txtPath.Location = new System.Drawing.Point(89, 22);
-            this.txtPath.Name = "txtPath";
-            this.txtPath.Size = new System.Drawing.Size(826, 21);
-            this.txtPath.TabIndex = 1;
+            this.gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.gridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.gridView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.gridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridView.Location = new System.Drawing.Point(0, 0);
+            this.gridView.Name = "gridView";
+            this.gridView.ReadOnly = true;
+            this.gridView.RowHeadersWidth = 30;
+            this.gridView.RowTemplate.Height = 23;
+            this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.gridView.Size = new System.Drawing.Size(886, 505);
+            this.gridView.TabIndex = 1;
+            this.gridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridView_CellMouseDoubleClick);
             // 
-            // lblPath
+            // panel1
             // 
-            this.lblPath.AutoSize = true;
-            this.lblPath.Location = new System.Drawing.Point(28, 25);
-            this.lblPath.Name = "lblPath";
-            this.lblPath.Size = new System.Drawing.Size(30, 12);
-            this.lblPath.TabIndex = 0;
-            this.lblPath.Text = "Path";
-            this.lblPath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.panel1.Controls.Add(this.BindingNavi);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(886, 29);
+            this.panel1.TabIndex = 1;
             // 
-            // splitContainer1
+            // BindingNavi
             // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 62);
-            this.splitContainer1.Name = "splitContainer1";
+            this.BindingNavi.AddNewItem = null;
+            this.BindingNavi.CountItem = this.NaviCount;
+            this.BindingNavi.DeleteItem = null;
+            this.BindingNavi.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BindingNavi.GripMargin = new System.Windows.Forms.Padding(650, 2, 2, 2);
+            this.BindingNavi.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.bindingNavigatorMoveFirstItem,
+            this.bindingNavigatorMovePreviousItem,
+            this.bindingNavigatorSeparator,
+            this.NaviPos,
+            this.NaviCount,
+            this.bindingNavigatorSeparator1,
+            this.bindingNavigatorMoveNextItem,
+            this.bindingNavigatorMoveLastItem,
+            this.bindingNavigatorSeparator2});
+            this.BindingNavi.Location = new System.Drawing.Point(0, 0);
+            this.BindingNavi.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
+            this.BindingNavi.MoveLastItem = this.bindingNavigatorMoveLastItem;
+            this.BindingNavi.MoveNextItem = this.bindingNavigatorMoveNextItem;
+            this.BindingNavi.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
+            this.BindingNavi.Name = "BindingNavi";
+            this.BindingNavi.PositionItem = this.NaviPos;
+            this.BindingNavi.Size = new System.Drawing.Size(886, 29);
+            this.BindingNavi.TabIndex = 0;
+            this.BindingNavi.Text = "bindingNavigator1";
             // 
-            // splitContainer1.Panel1
+            // NaviCount
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
+            this.NaviCount.Name = "NaviCount";
+            this.NaviCount.Size = new System.Drawing.Size(27, 26);
+            this.NaviCount.Text = "/{0}";
+            this.NaviCount.ToolTipText = "전체 항목 수";
             // 
-            // splitContainer1.Panel2
+            // bindingNavigatorMoveFirstItem
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.tabControl2);
-            this.splitContainer1.Size = new System.Drawing.Size(1283, 560);
-            this.splitContainer1.SplitterDistance = 385;
-            this.splitContainer1.TabIndex = 2;
+            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
+            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
+            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 26);
+            this.bindingNavigatorMoveFirstItem.Text = "처음으로 이동";
+            this.bindingNavigatorMoveFirstItem.Click += new System.EventHandler(this.bindingNavigatorMoveFirstItem_Click);
+            // 
+            // bindingNavigatorMovePreviousItem
+            // 
+            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
+            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
+            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 26);
+            this.bindingNavigatorMovePreviousItem.Text = "이전으로 이동";
+            this.bindingNavigatorMovePreviousItem.Click += new System.EventHandler(this.bindingNavigatorMovePreviousItem_Click);
+            // 
+            // bindingNavigatorSeparator
+            // 
+            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 29);
+            // 
+            // NaviPos
+            // 
+            this.NaviPos.AccessibleName = "위치";
+            this.NaviPos.AutoSize = false;
+            this.NaviPos.Font = new System.Drawing.Font("맑은 고딕", 9F);
+            this.NaviPos.Name = "NaviPos";
+            this.NaviPos.Size = new System.Drawing.Size(50, 23);
+            this.NaviPos.Text = "0";
+            this.NaviPos.ToolTipText = "현재 위치";
+            this.NaviPos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NaviPos_KeyDown);
+            // 
+            // bindingNavigatorSeparator1
+            // 
+            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 29);
+            // 
+            // bindingNavigatorMoveNextItem
+            // 
+            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
+            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
+            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 26);
+            this.bindingNavigatorMoveNextItem.Text = "다음으로 이동";
+            this.bindingNavigatorMoveNextItem.Click += new System.EventHandler(this.bindingNavigatorMoveNextItem_Click);
+            // 
+            // bindingNavigatorMoveLastItem
+            // 
+            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
+            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
+            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 26);
+            this.bindingNavigatorMoveLastItem.Text = "마지막으로 이동";
+            this.bindingNavigatorMoveLastItem.Click += new System.EventHandler(this.bindingNavigatorMoveLastItem_Click);
+            // 
+            // bindingNavigatorSeparator2
+            // 
+            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 29);
+            // 
+            // tabTree
+            // 
+            this.tabTree.Controls.Add(this.trvLog);
+            this.tabTree.Location = new System.Drawing.Point(4, 22);
+            this.tabTree.Name = "tabTree";
+            this.tabTree.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTree.Size = new System.Drawing.Size(886, 534);
+            this.tabTree.TabIndex = 1;
+            this.tabTree.Text = "TreeView";
+            this.tabTree.UseVisualStyleBackColor = true;
+            // 
+            // trvLog
+            // 
+            this.trvLog.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.trvLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trvLog.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.trvLog.Location = new System.Drawing.Point(3, 3);
+            this.trvLog.Name = "trvLog";
+            this.trvLog.Size = new System.Drawing.Size(880, 528);
+            this.trvLog.TabIndex = 0;
             // 
             // splitContainer2
             // 
@@ -274,253 +391,122 @@ namespace LogParser
             this.lView.DrawItem += new System.Windows.Forms.DrawListViewItemEventHandler(this.lView_DrawItem);
             this.lView.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lView_MouseDoubleClick);
             // 
-            // tabControl2
+            // splitContainer1
             // 
-            this.tabControl2.Controls.Add(this.tabText);
-            this.tabControl2.Controls.Add(this.tabTable);
-            this.tabControl2.Controls.Add(this.tabTree);
-            this.tabControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl2.Location = new System.Drawing.Point(0, 0);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(894, 560);
-            this.tabControl2.TabIndex = 0;
-            this.tabControl2.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl2_Selected);
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 62);
+            this.splitContainer1.Name = "splitContainer1";
             // 
-            // tabText
+            // splitContainer1.Panel1
             // 
-            this.tabText.Controls.Add(this.btnParseTable);
-            this.tabText.Controls.Add(this.btnParseTree);
-            this.tabText.Controls.Add(this.richTxtBox);
-            this.tabText.Controls.Add(this.LineNumTxtBox);
-            this.tabText.Location = new System.Drawing.Point(4, 22);
-            this.tabText.Name = "tabText";
-            this.tabText.Padding = new System.Windows.Forms.Padding(3);
-            this.tabText.Size = new System.Drawing.Size(886, 534);
-            this.tabText.TabIndex = 0;
-            this.tabText.Text = "Text";
-            this.tabText.UseVisualStyleBackColor = true;
+            this.splitContainer1.Panel1.Controls.Add(this.splitContainer2);
             // 
-            // btnParseTable
+            // splitContainer1.Panel2
             // 
-            this.btnParseTable.Location = new System.Drawing.Point(630, 485);
-            this.btnParseTable.Name = "btnParseTable";
-            this.btnParseTable.Size = new System.Drawing.Size(114, 23);
-            this.btnParseTable.TabIndex = 4;
-            this.btnParseTable.Text = "Table Parsing";
-            this.btnParseTable.UseVisualStyleBackColor = true;
-            this.btnParseTable.Click += new System.EventHandler(this.btnParseTable_Click);
+            this.splitContainer1.Panel2.Controls.Add(this.tabControl2);
+            this.splitContainer1.Size = new System.Drawing.Size(1283, 560);
+            this.splitContainer1.SplitterDistance = 385;
+            this.splitContainer1.TabIndex = 2;
             // 
-            // btnParseTree
+            // lblPath
             // 
-            this.btnParseTree.Location = new System.Drawing.Point(750, 485);
-            this.btnParseTree.Name = "btnParseTree";
-            this.btnParseTree.Size = new System.Drawing.Size(114, 23);
-            this.btnParseTree.TabIndex = 3;
-            this.btnParseTree.Text = "Tree ViewParsing";
-            this.btnParseTree.UseVisualStyleBackColor = true;
-            this.btnParseTree.Click += new System.EventHandler(this.btnParse_Click);
+            this.lblPath.AutoSize = true;
+            this.lblPath.Location = new System.Drawing.Point(28, 25);
+            this.lblPath.Name = "lblPath";
+            this.lblPath.Size = new System.Drawing.Size(30, 12);
+            this.lblPath.TabIndex = 0;
+            this.lblPath.Text = "Path";
+            this.lblPath.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // richTxtBox
+            // txtPath
             // 
-            this.richTxtBox.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.richTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTxtBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTxtBox.Location = new System.Drawing.Point(69, 3);
-            this.richTxtBox.Name = "richTxtBox";
-            this.richTxtBox.ReadOnly = true;
-            this.richTxtBox.Size = new System.Drawing.Size(814, 528);
-            this.richTxtBox.TabIndex = 2;
-            this.richTxtBox.Text = "";
-            this.richTxtBox.WordWrap = false;
-            this.richTxtBox.VScroll += new System.EventHandler(this.richTxtBox_VScroll);
+            this.txtPath.Location = new System.Drawing.Point(89, 22);
+            this.txtPath.Name = "txtPath";
+            this.txtPath.Size = new System.Drawing.Size(826, 21);
+            this.txtPath.TabIndex = 1;
             // 
-            // LineNumTxtBox
+            // tabControl1
             // 
-            this.LineNumTxtBox.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.LineNumTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.LineNumTxtBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LineNumTxtBox.ForeColor = System.Drawing.Color.Blue;
-            this.LineNumTxtBox.Location = new System.Drawing.Point(3, 3);
-            this.LineNumTxtBox.Name = "LineNumTxtBox";
-            this.LineNumTxtBox.ReadOnly = true;
-            this.LineNumTxtBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.LineNumTxtBox.Size = new System.Drawing.Size(66, 528);
-            this.LineNumTxtBox.TabIndex = 1;
-            this.LineNumTxtBox.Text = "";
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Location = new System.Drawing.Point(316, 62);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(662, 530);
+            this.tabControl1.TabIndex = 1;
             // 
-            // tabTable
+            // tabPage1
             // 
-            this.tabTable.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.tabTable.Controls.Add(this.panel2);
-            this.tabTable.Controls.Add(this.panel1);
-            this.tabTable.Location = new System.Drawing.Point(4, 22);
-            this.tabTable.Name = "tabTable";
-            this.tabTable.Size = new System.Drawing.Size(886, 534);
-            this.tabTable.TabIndex = 2;
-            this.tabTable.Text = "Table";
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(654, 504);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabTree
+            // tabPage2
             // 
-            this.tabTree.Controls.Add(this.trvLog);
-            this.tabTree.Location = new System.Drawing.Point(4, 22);
-            this.tabTree.Name = "tabTree";
-            this.tabTree.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTree.Size = new System.Drawing.Size(886, 534);
-            this.tabTree.TabIndex = 1;
-            this.tabTree.Text = "TreeView";
-            this.tabTree.UseVisualStyleBackColor = true;
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(654, 504);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // trvLog
+            // btnFolderDlg
             // 
-            this.trvLog.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.trvLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trvLog.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.trvLog.Location = new System.Drawing.Point(3, 3);
-            this.trvLog.Name = "trvLog";
-            this.trvLog.Size = new System.Drawing.Size(880, 528);
-            this.trvLog.TabIndex = 0;
+            this.btnFolderDlg.Location = new System.Drawing.Point(921, 20);
+            this.btnFolderDlg.Name = "btnFolderDlg";
+            this.btnFolderDlg.Size = new System.Drawing.Size(28, 23);
+            this.btnFolderDlg.TabIndex = 2;
+            this.btnFolderDlg.Text = "...";
+            this.btnFolderDlg.UseVisualStyleBackColor = true;
+            this.btnFolderDlg.Click += new System.EventHandler(this.btnFolderDlg_Click);
             // 
-            // FileDialog
+            // txtSearch
             // 
-            this.FileDialog.FileName = "openFileDialog1";
+            this.txtSearch.Location = new System.Drawing.Point(984, 35);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(137, 21);
+            this.txtSearch.TabIndex = 3;
+            this.txtSearch.Visible = false;
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
             // 
-            // panel1
+            // btnSearch
             // 
-            this.panel1.Controls.Add(this.BindingNavi);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(886, 29);
-            this.panel1.TabIndex = 1;
+            this.btnSearch.Location = new System.Drawing.Point(1127, 33);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 4;
+            this.btnSearch.Text = "검색";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Visible = false;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
-            // panel2
+            // btnUp
             // 
-            this.panel2.Controls.Add(this.gridView);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 29);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(886, 505);
-            this.panel2.TabIndex = 2;
+            this.btnUp.Location = new System.Drawing.Point(1220, 20);
+            this.btnUp.Name = "btnUp";
+            this.btnUp.Size = new System.Drawing.Size(51, 18);
+            this.btnUp.TabIndex = 5;
+            this.btnUp.Text = "UP";
+            this.btnUp.UseVisualStyleBackColor = true;
+            this.btnUp.Visible = false;
+            this.btnUp.Click += new System.EventHandler(this.btnUp_Click);
             // 
-            // gridView
+            // btnDown
             // 
-            this.gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.gridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.gridView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.gridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridView.Location = new System.Drawing.Point(0, 0);
-            this.gridView.Name = "gridView";
-            this.gridView.ReadOnly = true;
-            this.gridView.RowHeadersWidth = 30;
-            this.gridView.RowTemplate.Height = 23;
-            this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(886, 505);
-            this.gridView.TabIndex = 1;
-            this.gridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridView_CellMouseDoubleClick);
-            // 
-            // BindingNavi
-            // 
-            this.BindingNavi.AddNewItem = this.bindingNavigatorMoveFirstItem;
-            this.BindingNavi.CountItem = this.NaviCount;
-            this.BindingNavi.DeleteItem = null;
-            this.BindingNavi.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.BindingNavi.GripMargin = new System.Windows.Forms.Padding(680, 2, 2, 2);
-            this.BindingNavi.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.bindingNavigatorMoveFirstItem,
-            this.bindingNavigatorMovePreviousItem,
-            this.bindingNavigatorSeparator,
-            this.NaviPos,
-            this.NaviCount,
-            this.bindingNavigatorSeparator1,
-            this.bindingNavigatorMoveNextItem,
-            this.bindingNavigatorMoveLastItem,
-            this.bindingNavigatorSeparator2});
-            this.BindingNavi.Location = new System.Drawing.Point(0, 0);
-            this.BindingNavi.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
-            this.BindingNavi.MoveLastItem = this.bindingNavigatorMoveLastItem;
-            this.BindingNavi.MoveNextItem = this.bindingNavigatorMoveNextItem;
-            this.BindingNavi.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
-            this.BindingNavi.Name = "BindingNavi";
-            this.BindingNavi.PositionItem = this.NaviPos;
-            this.BindingNavi.Size = new System.Drawing.Size(886, 29);
-            this.BindingNavi.TabIndex = 0;
-            this.BindingNavi.Text = "bindingNavigator1";
-            // 
-            // bindingNavigatorMoveFirstItem
-            // 
-            this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
-            this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
-            this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(23, 26);
-            this.bindingNavigatorMoveFirstItem.Text = "처음으로 이동";
-            this.bindingNavigatorMoveFirstItem.Click += new System.EventHandler(this.bindingNavigatorMoveFirstItem_Click);
-            // 
-            // bindingNavigatorMovePreviousItem
-            // 
-            this.bindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
-            this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
-            this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(23, 26);
-            this.bindingNavigatorMovePreviousItem.Text = "이전으로 이동";
-            this.bindingNavigatorMovePreviousItem.Click += new System.EventHandler(this.bindingNavigatorMovePreviousItem_Click);
-            // 
-            // bindingNavigatorSeparator
-            // 
-            this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 29);
-            // 
-            // NaviPos
-            // 
-            this.NaviPos.AccessibleName = "위치";
-            this.NaviPos.AutoSize = false;
-            this.NaviPos.Font = new System.Drawing.Font("맑은 고딕", 9F);
-            this.NaviPos.Name = "bindingNavigatorPositionItem";
-            this.NaviPos.Size = new System.Drawing.Size(50, 23);
-            this.NaviPos.Text = "0";
-            this.NaviPos.ToolTipText = "현재 위치";
-            this.NaviPos.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NaviPos_KeyDown);
-            // 
-            // NaviCount
-            // 
-            this.NaviCount.Name = "bindingNavigatorCountItem";
-            this.NaviCount.Size = new System.Drawing.Size(27, 26);
-            this.NaviCount.Text = "/{0}";
-            this.NaviCount.ToolTipText = "전체 항목 수";
-            // 
-            // bindingNavigatorSeparator1
-            // 
-            this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 29);
-            // 
-            // bindingNavigatorMoveNextItem
-            // 
-            this.bindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
-            this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
-            this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(23, 26);
-            this.bindingNavigatorMoveNextItem.Text = "다음으로 이동";
-            this.bindingNavigatorMoveNextItem.Click += new System.EventHandler(this.bindingNavigatorMoveNextItem_Click);
-            // 
-            // bindingNavigatorMoveLastItem
-            // 
-            this.bindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
-            this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
-            this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(23, 26);
-            this.bindingNavigatorMoveLastItem.Text = "마지막으로 이동";
-            this.bindingNavigatorMoveLastItem.Click += new System.EventHandler(this.bindingNavigatorMoveLastItem_Click);
-            // 
-            // bindingNavigatorSeparator2
-            // 
-            this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 29);
+            this.btnDown.Font = new System.Drawing.Font("굴림", 8F);
+            this.btnDown.Location = new System.Drawing.Point(1220, 44);
+            this.btnDown.Name = "btnDown";
+            this.btnDown.Size = new System.Drawing.Size(51, 18);
+            this.btnDown.TabIndex = 6;
+            this.btnDown.Text = "DOWN";
+            this.btnDown.UseVisualStyleBackColor = true;
+            this.btnDown.Visible = false;
+            this.btnDown.Click += new System.EventHandler(this.btnDown_Click);
             // 
             // btnInit
             // 
@@ -532,6 +518,23 @@ namespace LogParser
             this.btnInit.UseVisualStyleBackColor = true;
             this.btnInit.Visible = false;
             this.btnInit.Click += new System.EventHandler(this.btnInit_Click);
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.btnInit);
+            this.panel3.Controls.Add(this.btnDown);
+            this.panel3.Controls.Add(this.btnUp);
+            this.panel3.Controls.Add(this.btnSearch);
+            this.panel3.Controls.Add(this.txtSearch);
+            this.panel3.Controls.Add(this.btnFolderDlg);
+            this.panel3.Controls.Add(this.tabControl1);
+            this.panel3.Controls.Add(this.txtPath);
+            this.panel3.Controls.Add(this.lblPath);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1283, 62);
+            this.panel3.TabIndex = 1;
             // 
             // Form1
             // 
@@ -547,66 +550,50 @@ namespace LogParser
             this.Load += new System.EventHandler(this.Form1_Load);
             this.DragDrop += new System.Windows.Forms.DragEventHandler(this.Form1_DragDrop);
             this.DragEnter += new System.Windows.Forms.DragEventHandler(this.Form1_DragEnter);
-            this.Resize += new System.EventHandler(this.Form1_Resize);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            this.tabControl2.ResumeLayout(false);
+            this.tabText.ResumeLayout(false);
+            this.tabTable.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.BindingNavi)).EndInit();
+            this.BindingNavi.ResumeLayout(false);
+            this.BindingNavi.PerformLayout();
+            this.tabTree.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.tabControl2.ResumeLayout(false);
-            this.tabText.ResumeLayout(false);
-            this.tabTable.ResumeLayout(false);
-            this.tabTree.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BindingNavi)).EndInit();
-            this.BindingNavi.ResumeLayout(false);
-            this.BindingNavi.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox txtPath;
-        private System.Windows.Forms.Label lblPath;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TabControl tabControl2;
-        private System.Windows.Forms.TabPage tabText;
-        private System.Windows.Forms.TabPage tabTree;
-        private System.Windows.Forms.Button btnFolderDlg;
-        private System.Windows.Forms.TreeView trvLog;
-        private System.Windows.Forms.OpenFileDialog FileDialog;
-        private System.Windows.Forms.RichTextBox LineNumTxtBox;
-        private System.Windows.Forms.RichTextBox richTxtBox;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.TreeView trvDir;
-        private System.Windows.Forms.ListView lView;
-        private Button btnSearch;
-        private TextBox txtSearch;
-        private Button btnUp;
-        private Button btnDown;
-        private Button btnParseTree;
-        private TabPage tabTable;
+
+        private BindingSource bindingSource1;
+        private OpenFileDialog FileDialog;
+        private TabControl tabControl2;
+        private TabPage tabText;
         private Button btnParseTable;
+        private Button btnParseTree;
+        private RichTextBox richTxtBox;
+        private RichTextBox LineNumTxtBox;
+        private TabPage tabTable;
         private Panel panel2;
         private DataGridView gridView;
         private Panel panel1;
         private BindingNavigator BindingNavi;
-        private ToolStripButton bindingNavigatorMoveFirstItem;
         private ToolStripLabel NaviCount;
+        private ToolStripButton bindingNavigatorMoveFirstItem;
         private ToolStripButton bindingNavigatorMovePreviousItem;
         private ToolStripSeparator bindingNavigatorSeparator;
         private ToolStripTextBox NaviPos;
@@ -614,8 +601,24 @@ namespace LogParser
         private ToolStripButton bindingNavigatorMoveNextItem;
         private ToolStripButton bindingNavigatorMoveLastItem;
         private ToolStripSeparator bindingNavigatorSeparator2;
-        private BindingSource bindingSource1;
+        private TabPage tabTree;
+        private TreeView trvLog;
+        private SplitContainer splitContainer2;
+        private TreeView trvDir;
+        private ListView lView;
+        private SplitContainer splitContainer1;
+        private Label lblPath;
+        private TextBox txtPath;
+        private TabControl tabControl1;
+        private TabPage tabPage1;
+        private TabPage tabPage2;
+        private Button btnFolderDlg;
+        private TextBox txtSearch;
+        private Button btnSearch;
+        private Button btnUp;
+        private Button btnDown;
         private Button btnInit;
+        private Panel panel3;
     }
 }
 

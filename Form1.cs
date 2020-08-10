@@ -46,7 +46,7 @@ namespace LogParser
             LoadDirectory();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnFolderDlg_Click(object sender, EventArgs e)
         {
             var fileContent = string.Empty;
             FileDialog.Filter = "log files (*.log)|*.log|txt files (*.txt)|*.txt|All files (*.*)|*.*";
@@ -65,10 +65,11 @@ namespace LogParser
             if (FileDialog.ShowDialog() == DialogResult.OK)
             {
                 richTxtBox.Clear();
+                LineNumTxtBox.Text = "";
                 txtPath.Text = FileDialog.FileName;
 
                 // Change the PrevPath value
-                Properties.Settings.Default.PrevPath = txtPath.Text;
+                Properties.Settings.Default.PrevPath = FileDialog.FileName;
                 Properties.Settings.Default.Save();
 
                 //Read the contents of the file into a stream
@@ -77,11 +78,9 @@ namespace LogParser
                 using (StreamReader reader = new StreamReader(fileStream, Encoding.Default))
                 {
                     richTxtBox.Text = reader.ReadToEnd();
-
                     reader.Close();
                 }
 
-                //richTxtBox.Text = fileContent;
                 AddLineNumbers();
 
                 if (btnSearch.Text == "마침")
@@ -90,66 +89,22 @@ namespace LogParser
                     txtSearch.Text = "";
                 }
                 ControlSearch();
-            }
-        }
 
-        public int getWidth()
-        {
-            int w = 25;
-            // get total lines of richTxtBox    
-            int line = richTxtBox.Lines.Length;
-
-            if (line <= 99)
-            {
-                w = 20 + (int)richTxtBox.Font.Size;
+                tabControl2.SelectedTab = tabText;
             }
-            else if (line <= 999)
-            {
-                w = 30 + (int)richTxtBox.Font.Size;
-            }
-            else
-            {
-                w = 50 + (int)richTxtBox.Font.Size;
-            }
-
-            return w;
         }
 
         public void AddLineNumbers()
         {
-            // create & set Point pt to (0,0)    
-            Point pt = new Point(0, 0);
-            // get First Index & First Line from richTxtBox    
-            int First_Index = richTxtBox.GetCharIndexFromPosition(pt);
-            int First_Line = richTxtBox.GetLineFromCharIndex(First_Index);
-            // set X & Y coordinates of Point pt to ClientRectangle Width & Height respectively    
-            pt.X = ClientRectangle.Width;
-            pt.Y = ClientRectangle.Height;
-            // get Last Index & Last Line from richTxtBox    
-            int Last_Index = richTxtBox.GetCharIndexFromPosition(pt);
-            int Last_Line = richTxtBox.GetLineFromCharIndex(Last_Index);
-            // set Center alignment to LineNumTxtBox    
-            LineNumTxtBox.SelectionAlignment = HorizontalAlignment.Center;
-            // set LineNumTxtBox text to null & width to getWidth() function value    
-            LineNumTxtBox.Text = "";
-            LineNumTxtBox.Width = getWidth();
-            // now add each line number to LineNumTxtBox upto last line    
-            for (int i = First_Line; i <= Last_Line; i++)
+            int len = richTxtBox.Lines.Length;
+            string text = "";
+
+            for (int i=0; i<len; i++)
             {
-                LineNumTxtBox.Text += i + 1 + "\n";
+                text += (i + 1).ToString();
+                text += "\r\n";
             }
-        }
-
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            AddLineNumbers();
-        }
-
-        private void richTxtBox_VScroll(object sender, EventArgs e)
-        {
-            LineNumTxtBox.Text = "";
-            AddLineNumbers();
-            LineNumTxtBox.Invalidate();
+            LineNumTxtBox.Text = text;
         }
 
         // treeview 탐색기
@@ -234,6 +189,7 @@ namespace LogParser
             }
         }
 
+        string treePath = null;
         // 폴더를 선택하기 전 이벤트 발생
         private void trvDir_BeforeSelect(object sender, TreeViewCancelEventArgs e)
         {
@@ -249,14 +205,34 @@ namespace LogParser
                 FileAttributes attr = File.GetAttributes(fullPath);
                 foreach (FileInfo file in files)
                 {
-                    ListViewItem item = new ListViewItem(file.Name);
-                    lView.Items.Add(item);
-                    txtPath.Text = fullPath;
+                    if(file.Extension == ".log" || file.Extension == ".txt" || file.Extension == ".xml")
+                    {
+                        ListViewItem item = new ListViewItem(file.Name);
+                        lView.Items.Add(item);
+                        treePath = fullPath;
+                        txtPath.Text = fullPath;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void lView_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (lView.SelectedItems.Count == 1)
+            {
+                ListView.SelectedListViewItemCollection items = lView.SelectedItems;
+                ListViewItem item = items[0];
+
+                string fullPath = treePath + '\\' + item.Text;
+
+                ReadFile(fullPath);
+
+                ControlSearch();
+                tabControl2.SelectedTab = tabText;
             }
         }
 
@@ -453,27 +429,6 @@ namespace LogParser
                 btnInit.Visible = true;
                 BindingNavi.Enabled = false;
             }
-
-            //foreach (DataGridViewRow row in gridView.Rows)
-            //{
-            //    if (row.Cells[4].Value != null && row.Cells[4].Value.ToString().Contains(txtSearch.Text))
-            //    {
-            //        rowIndex.Add(row.Index);
-            //        newTable.Rows.Add(row.Cells[0].Value, row.Cells[1].Value, row.Cells[2].Value, row.Cells[3].Value, row.Cells[4].Value);
-            //    }
-            //}
-            //if(rowIndex.Count == 0)
-            //{
-            //    txtSearch.Text = "";
-            //    MessageBox.Show("찾으시려는 문자가 존재하지 않습니다!");
-            //    return;
-            //}
-            //else
-            //{
-            //    gridView.DataSource = newTable;
-            //    btnInit.Visible = true;
-            //    BindingNavi.Enabled = false;
-            //}
         }
 
         private void SearchKeyword()
@@ -586,27 +541,14 @@ namespace LogParser
             // 파일 경로 통하여 text 읽어오기
             ReadFile(txtPath.Text);
             ControlSearch();
-        }
-
-        private void lView_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if(lView.SelectedItems.Count == 1)
-            {
-                ListView.SelectedListViewItemCollection items = lView.SelectedItems;
-                ListViewItem item = items[0];
-
-                string fullPath = txtPath.Text + '\\' + item.Text;
-
-                ReadFile(fullPath);
-
-                ControlSearch();
-            }
+            tabControl2.SelectedTab = tabText;
         }
 
         public void ReadFile(string fullPath)
         {
             StreamReader sr = new StreamReader(
                 new FileStream(fullPath, FileMode.Open), Encoding.Default);
+            LineNumTxtBox.Text = "";
             richTxtBox.Text = sr.ReadToEnd();
 
             sr.Close();
@@ -624,13 +566,15 @@ namespace LogParser
             if (richTxtBox.Text != "") // 조건 더 추가 필요
             {
                 LoadXmlTree();
+                tabControl2.SelectedTab = tabTree;
+
                 MessageBox.Show("파싱을 완료하였습니다!");
             }
         }
 
         private DataTable table = null;
         private string[] header;
-        private List<DataTable> tables = new List<DataTable>();
+        private List<DataTable> tables = null;
         BindingSource customersBindingSource = new BindingSource();
         // text -> table
         private void btnParseTable_Click(object sender, EventArgs e)
@@ -641,6 +585,7 @@ namespace LogParser
             XmlParser parser = new XmlParser();
             parser.StringParsing(richTxtBox.Text); // 미리 text로 불러온 파일 속성 파싱
             table = new DataTable();
+            tables = new List<DataTable>();
 
             header = parser.attr;
             foreach(string s in header)
@@ -667,9 +612,10 @@ namespace LogParser
             }
             this.customersBindingSource.DataSource = tables;
             NaviCount.Text = tables.Count.ToString();
-
+            NaviPos.Text = "1";
             gridView.DataSource = tables[0];
 
+            tabControl2.SelectedTab = tabTable;
             MessageBox.Show("테이블로 파싱을 완료하였습니다!");
         }
 
@@ -686,10 +632,7 @@ namespace LogParser
 
         private void bindingNavigatorMoveFirstItem_Click(object sender, EventArgs e)
         {
-            if(NaviPos.Text != "0")
-            {
-                gridView.DataSource = tables[0];
-            }
+            gridView.DataSource = tables[0];
         }
 
         private void bindingNavigatorMovePreviousItem_Click(object sender, EventArgs e)
@@ -724,6 +667,11 @@ namespace LogParser
             {
                 gridView.DataSource = tables[Int32.Parse(NaviPos.Text) - 1];
             }
+        }
+        // line number 드래그 금지
+        private void LineNumTxtBox_Enter(object sender, EventArgs e)
+        {
+            tabControl2.Focus();
         }
     }
 }
