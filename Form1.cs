@@ -267,11 +267,17 @@ namespace LogParser
                 btnSearch.Visible = false;
                 btnDown.Visible = false;
                 btnUp.Visible = false;
+                grpRowNum.Visible = false;
             }
             else if (tabControl2.SelectedTab == tabTable)
             {
                 btnDown.Visible = false;
                 btnUp.Visible = false;
+                grpRowNum.Visible = true;
+            }
+            else if (tabControl2.SelectedTab == tabText)
+            {
+                grpRowNum.Visible = false;
             }
         }
 
@@ -410,7 +416,7 @@ namespace LogParser
             {
                 foreach(DataRow r in t.Rows)
                 {
-                    if(r[4] != null && r[4].ToString().Contains(txtSearch.Text))
+                    if(r[4] != null && r[4].ToString().IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0)
                     {
                         newTable.Rows.Add(r[0], r[1], r[2], r[3], r[4]);
                     }
@@ -436,7 +442,7 @@ namespace LogParser
             // 키워드 검색 이벤트 처리
             string text = richTxtBox.Text;
 
-            if (!text.Contains(txtSearch.Text))
+            if (text.IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) < 0)
             {
                 btnSearch.Text = "검색";
                 txtSearch.Text = "";
@@ -575,32 +581,75 @@ namespace LogParser
         private DataTable table = null;
         private string[] header;
         private List<DataTable> tables = null;
+        private DataTable wholeTable = null;
         BindingSource customersBindingSource = new BindingSource();
+        private int rdoNum = 20;
+        XmlParser parser = null;
+        
         // text -> table
         private void btnParseTable_Click(object sender, EventArgs e)
         {
             if (richTxtBox.Text == "")
                 return;
             
-            XmlParser parser = new XmlParser();
+            parser = new XmlParser();
             parser.StringParsing(richTxtBox.Text); // 미리 text로 불러온 파일 속성 파싱
             table = new DataTable();
             tables = new List<DataTable>();
-
+            wholeTable = new DataTable();
+            
             header = parser.attr;
             foreach(string s in header)
             {
                 table.Columns.Add(s, typeof(string));
+                wholeTable.Columns.Add(s, typeof(string));
+            }
+            
+            for (int i=0; i<parser.listString.Count; i++)
+            {
+                wholeTable.Rows.Add(parser.listString[i]);
             }
 
-            this.BindingNavi.BindingSource = this.customersBindingSource;
+            DrawingTable();
 
-            for (int i = 0; i <= parser.listString.Count / 21; i++)
+            tabControl2.SelectedTab = tabTable;
+            grpRowNum.Enabled = true;
+            MessageBox.Show("테이블로 파싱을 완료하였습니다!");
+        }
+
+        private void rdoBtn10_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rdoBtn10.Checked)
             {
-                for (int j=1; j<22; j++)
+                rdoNum = 10;
+            }
+            else if (rdoBtn20.Checked)
+            {
+                rdoNum = 20;
+            }
+            else if (rdoBtn30.Checked)
+            {
+                rdoNum = 30;
+            }
+            else if (rdoBtn40.Checked)
+            {
+                rdoNum = 40;
+            }
+            
+            DrawingTable();
+        }
+
+        private void DrawingTable()
+        {
+            // 22 -> change to rdoBtn value + 1
+            // 21 -> change to rdoBtn value
+            tables.Clear();
+            for (int i = 0; i <= wholeTable.Rows.Count / rdoNum; i++)
+            {
+                for (int j = 1; j < rdoNum + 1; j++)
                 {
-                    if(parser.listString.Count > i*21+j)
-                        table.Rows.Add(parser.listString[i * 21 + j]);
+                    if (wholeTable.Rows.Count > i * rdoNum + j)
+                        table.ImportRow(wholeTable.Rows[i * rdoNum + j]);
                 }
                 tables.Add(table);
                 table = new DataTable();
@@ -615,8 +664,8 @@ namespace LogParser
             NaviPos.Text = "1";
             gridView.DataSource = tables[0];
 
-            tabControl2.SelectedTab = tabTable;
-            MessageBox.Show("테이블로 파싱을 완료하였습니다!");
+            this.BindingNavi.BindingSource = this.customersBindingSource;
+            BindingNavi.BindingSource.MoveFirst();
         }
 
         // dataGridView에서 셀을 마우스로 더블 클릭할 때 event 발생
@@ -653,7 +702,6 @@ namespace LogParser
         private void btnInit_Click(object sender, EventArgs e)
         {
             // 저장해둔 tables 실행
-
             btnInit.Visible = false;
             BindingNavi.Enabled = true;
 

@@ -62,9 +62,6 @@ namespace LogParser
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.lblPath = new System.Windows.Forms.Label();
             this.txtPath = new System.Windows.Forms.TextBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.btnFolderDlg = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
@@ -72,6 +69,11 @@ namespace LogParser
             this.btnDown = new System.Windows.Forms.Button();
             this.btnInit = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.grpRowNum = new System.Windows.Forms.GroupBox();
+            this.rdoBtn40 = new System.Windows.Forms.RadioButton();
+            this.rdoBtn10 = new System.Windows.Forms.RadioButton();
+            this.rdoBtn30 = new System.Windows.Forms.RadioButton();
+            this.rdoBtn20 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.tabControl2.SuspendLayout();
             this.tabText.SuspendLayout();
@@ -90,8 +92,8 @@ namespace LogParser
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.grpRowNum.SuspendLayout();
             this.SuspendLayout();
             // 
             // FileDialog
@@ -107,7 +109,7 @@ namespace LogParser
             this.tabControl2.Location = new System.Drawing.Point(0, 0);
             this.tabControl2.Name = "tabControl2";
             this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(894, 560);
+            this.tabControl2.Size = new System.Drawing.Size(894, 544);
             this.tabControl2.TabIndex = 0;
             this.tabControl2.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl2_Selected);
             // 
@@ -120,7 +122,7 @@ namespace LogParser
             this.tabText.Location = new System.Drawing.Point(4, 22);
             this.tabText.Name = "tabText";
             this.tabText.Padding = new System.Windows.Forms.Padding(3);
-            this.tabText.Size = new System.Drawing.Size(886, 534);
+            this.tabText.Size = new System.Drawing.Size(886, 518);
             this.tabText.TabIndex = 0;
             this.tabText.Text = "Text";
             this.tabText.UseVisualStyleBackColor = true;
@@ -128,7 +130,7 @@ namespace LogParser
             // btnParseTable
             // 
             this.btnParseTable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnParseTable.Location = new System.Drawing.Point(630, 485);
+            this.btnParseTable.Location = new System.Drawing.Point(630, 469);
             this.btnParseTable.Name = "btnParseTable";
             this.btnParseTable.Size = new System.Drawing.Size(114, 23);
             this.btnParseTable.TabIndex = 4;
@@ -139,7 +141,7 @@ namespace LogParser
             // btnParseTree
             // 
             this.btnParseTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnParseTree.Location = new System.Drawing.Point(750, 485);
+            this.btnParseTree.Location = new System.Drawing.Point(750, 469);
             this.btnParseTree.Name = "btnParseTree";
             this.btnParseTree.Size = new System.Drawing.Size(114, 23);
             this.btnParseTree.TabIndex = 3;
@@ -155,7 +157,7 @@ namespace LogParser
             this.richTxtBox.Location = new System.Drawing.Point(69, 3);
             this.richTxtBox.Name = "richTxtBox";
             this.richTxtBox.ReadOnly = true;
-            this.richTxtBox.Size = new System.Drawing.Size(814, 528);
+            this.richTxtBox.Size = new System.Drawing.Size(814, 512);
             this.richTxtBox.TabIndex = 2;
             this.richTxtBox.Text = "";
             this.richTxtBox.WordWrap = false;
@@ -171,7 +173,7 @@ namespace LogParser
             this.LineNumTxtBox.Name = "LineNumTxtBox";
             this.LineNumTxtBox.ReadOnly = true;
             this.LineNumTxtBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.LineNumTxtBox.Size = new System.Drawing.Size(66, 528);
+            this.LineNumTxtBox.Size = new System.Drawing.Size(66, 512);
             this.LineNumTxtBox.TabIndex = 1;
             this.LineNumTxtBox.Text = "";
             this.LineNumTxtBox.Enter += new System.EventHandler(this.LineNumTxtBox_Enter);
@@ -183,7 +185,7 @@ namespace LogParser
             this.tabTable.Controls.Add(this.panel1);
             this.tabTable.Location = new System.Drawing.Point(4, 22);
             this.tabTable.Name = "tabTable";
-            this.tabTable.Size = new System.Drawing.Size(886, 534);
+            this.tabTable.Size = new System.Drawing.Size(886, 518);
             this.tabTable.TabIndex = 2;
             this.tabTable.Text = "Table";
             // 
@@ -193,11 +195,12 @@ namespace LogParser
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 29);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(886, 505);
+            this.panel2.Size = new System.Drawing.Size(886, 489);
             this.panel2.TabIndex = 2;
             // 
             // gridView
             // 
+            this.gridView.AllowUserToAddRows = false;
             this.gridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.gridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gridView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
@@ -210,7 +213,7 @@ namespace LogParser
             this.gridView.RowHeadersWidth = 30;
             this.gridView.RowTemplate.Height = 23;
             this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.Size = new System.Drawing.Size(886, 505);
+            this.gridView.Size = new System.Drawing.Size(886, 489);
             this.gridView.TabIndex = 1;
             this.gridView.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.gridView_CellMouseDoubleClick);
             // 
@@ -330,7 +333,7 @@ namespace LogParser
             this.tabTree.Location = new System.Drawing.Point(4, 22);
             this.tabTree.Name = "tabTree";
             this.tabTree.Padding = new System.Windows.Forms.Padding(3);
-            this.tabTree.Size = new System.Drawing.Size(886, 534);
+            this.tabTree.Size = new System.Drawing.Size(886, 518);
             this.tabTree.TabIndex = 1;
             this.tabTree.Text = "TreeView";
             this.tabTree.UseVisualStyleBackColor = true;
@@ -342,7 +345,7 @@ namespace LogParser
             this.trvLog.Font = new System.Drawing.Font("맑은 고딕", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.trvLog.Location = new System.Drawing.Point(3, 3);
             this.trvLog.Name = "trvLog";
-            this.trvLog.Size = new System.Drawing.Size(880, 528);
+            this.trvLog.Size = new System.Drawing.Size(880, 512);
             this.trvLog.TabIndex = 0;
             // 
             // splitContainer2
@@ -358,7 +361,7 @@ namespace LogParser
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.lView);
-            this.splitContainer2.Size = new System.Drawing.Size(385, 560);
+            this.splitContainer2.Size = new System.Drawing.Size(385, 544);
             this.splitContainer2.SplitterDistance = 195;
             this.splitContainer2.TabIndex = 0;
             // 
@@ -369,7 +372,7 @@ namespace LogParser
             this.trvDir.Dock = System.Windows.Forms.DockStyle.Fill;
             this.trvDir.Location = new System.Drawing.Point(0, 0);
             this.trvDir.Name = "trvDir";
-            this.trvDir.Size = new System.Drawing.Size(195, 560);
+            this.trvDir.Size = new System.Drawing.Size(195, 544);
             this.trvDir.TabIndex = 1;
             this.trvDir.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.trvDir_BeforeExpand);
             this.trvDir.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.trvDir_BeforeSelect);
@@ -384,7 +387,7 @@ namespace LogParser
             this.lView.Location = new System.Drawing.Point(0, 0);
             this.lView.Name = "lView";
             this.lView.OwnerDraw = true;
-            this.lView.Size = new System.Drawing.Size(186, 560);
+            this.lView.Size = new System.Drawing.Size(186, 544);
             this.lView.TabIndex = 0;
             this.lView.UseCompatibleStateImageBehavior = false;
             this.lView.View = System.Windows.Forms.View.Tile;
@@ -394,7 +397,7 @@ namespace LogParser
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 62);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 78);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -404,14 +407,14 @@ namespace LogParser
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tabControl2);
-            this.splitContainer1.Size = new System.Drawing.Size(1283, 560);
+            this.splitContainer1.Size = new System.Drawing.Size(1283, 544);
             this.splitContainer1.SplitterDistance = 385;
             this.splitContainer1.TabIndex = 2;
             // 
             // lblPath
             // 
             this.lblPath.AutoSize = true;
-            this.lblPath.Location = new System.Drawing.Point(28, 25);
+            this.lblPath.Location = new System.Drawing.Point(28, 15);
             this.lblPath.Name = "lblPath";
             this.lblPath.Size = new System.Drawing.Size(30, 12);
             this.lblPath.TabIndex = 0;
@@ -420,44 +423,14 @@ namespace LogParser
             // 
             // txtPath
             // 
-            this.txtPath.Location = new System.Drawing.Point(89, 22);
+            this.txtPath.Location = new System.Drawing.Point(89, 12);
             this.txtPath.Name = "txtPath";
             this.txtPath.Size = new System.Drawing.Size(826, 21);
             this.txtPath.TabIndex = 1;
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(316, 62);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(662, 530);
-            this.tabControl1.TabIndex = 1;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(654, 504);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(654, 504);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // btnFolderDlg
             // 
-            this.btnFolderDlg.Location = new System.Drawing.Point(921, 20);
+            this.btnFolderDlg.Location = new System.Drawing.Point(921, 10);
             this.btnFolderDlg.Name = "btnFolderDlg";
             this.btnFolderDlg.Size = new System.Drawing.Size(28, 23);
             this.btnFolderDlg.TabIndex = 2;
@@ -521,20 +494,86 @@ namespace LogParser
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.grpRowNum);
             this.panel3.Controls.Add(this.btnInit);
             this.panel3.Controls.Add(this.btnDown);
             this.panel3.Controls.Add(this.btnUp);
             this.panel3.Controls.Add(this.btnSearch);
             this.panel3.Controls.Add(this.txtSearch);
             this.panel3.Controls.Add(this.btnFolderDlg);
-            this.panel3.Controls.Add(this.tabControl1);
             this.panel3.Controls.Add(this.txtPath);
             this.panel3.Controls.Add(this.lblPath);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1283, 62);
+            this.panel3.Size = new System.Drawing.Size(1283, 78);
             this.panel3.TabIndex = 1;
+            // 
+            // grpRowNum
+            // 
+            this.grpRowNum.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.grpRowNum.Controls.Add(this.rdoBtn40);
+            this.grpRowNum.Controls.Add(this.rdoBtn10);
+            this.grpRowNum.Controls.Add(this.rdoBtn30);
+            this.grpRowNum.Controls.Add(this.rdoBtn20);
+            this.grpRowNum.Enabled = false;
+            this.grpRowNum.Location = new System.Drawing.Point(715, 39);
+            this.grpRowNum.Name = "grpRowNum";
+            this.grpRowNum.Size = new System.Drawing.Size(200, 35);
+            this.grpRowNum.TabIndex = 5;
+            this.grpRowNum.TabStop = false;
+            this.grpRowNum.Text = "행 개수";
+            this.grpRowNum.Visible = false;
+            // 
+            // rdoBtn40
+            // 
+            this.rdoBtn40.AutoSize = true;
+            this.rdoBtn40.Location = new System.Drawing.Point(144, 13);
+            this.rdoBtn40.Name = "rdoBtn40";
+            this.rdoBtn40.Size = new System.Drawing.Size(35, 16);
+            this.rdoBtn40.TabIndex = 11;
+            this.rdoBtn40.TabStop = true;
+            this.rdoBtn40.Text = "40";
+            this.rdoBtn40.UseVisualStyleBackColor = true;
+            this.rdoBtn40.CheckedChanged += new System.EventHandler(this.rdoBtn10_CheckedChanged);
+            // 
+            // rdoBtn10
+            // 
+            this.rdoBtn10.AutoSize = true;
+            this.rdoBtn10.Location = new System.Drawing.Point(21, 13);
+            this.rdoBtn10.Name = "rdoBtn10";
+            this.rdoBtn10.Size = new System.Drawing.Size(35, 16);
+            this.rdoBtn10.TabIndex = 8;
+            this.rdoBtn10.TabStop = true;
+            this.rdoBtn10.Text = "10";
+            this.rdoBtn10.UseVisualStyleBackColor = true;
+            this.rdoBtn10.CheckedChanged += new System.EventHandler(this.rdoBtn10_CheckedChanged);
+            // 
+            // rdoBtn30
+            // 
+            this.rdoBtn30.AutoSize = true;
+            this.rdoBtn30.Location = new System.Drawing.Point(103, 13);
+            this.rdoBtn30.Name = "rdoBtn30";
+            this.rdoBtn30.Size = new System.Drawing.Size(35, 16);
+            this.rdoBtn30.TabIndex = 10;
+            this.rdoBtn30.TabStop = true;
+            this.rdoBtn30.Text = "30";
+            this.rdoBtn30.UseVisualStyleBackColor = true;
+            this.rdoBtn30.CheckedChanged += new System.EventHandler(this.rdoBtn10_CheckedChanged);
+            // 
+            // rdoBtn20
+            // 
+            this.rdoBtn20.AutoSize = true;
+            this.rdoBtn20.Checked = true;
+            this.rdoBtn20.Location = new System.Drawing.Point(62, 13);
+            this.rdoBtn20.Name = "rdoBtn20";
+            this.rdoBtn20.Size = new System.Drawing.Size(35, 16);
+            this.rdoBtn20.TabIndex = 9;
+            this.rdoBtn20.TabStop = true;
+            this.rdoBtn20.Text = "20";
+            this.rdoBtn20.UseVisualStyleBackColor = true;
+            this.rdoBtn20.CheckedChanged += new System.EventHandler(this.rdoBtn10_CheckedChanged);
             // 
             // Form1
             // 
@@ -570,9 +609,10 @@ namespace LogParser
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            this.grpRowNum.ResumeLayout(false);
+            this.grpRowNum.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -609,9 +649,6 @@ namespace LogParser
         private SplitContainer splitContainer1;
         private Label lblPath;
         private TextBox txtPath;
-        private TabControl tabControl1;
-        private TabPage tabPage1;
-        private TabPage tabPage2;
         private Button btnFolderDlg;
         private TextBox txtSearch;
         private Button btnSearch;
@@ -619,6 +656,11 @@ namespace LogParser
         private Button btnDown;
         private Button btnInit;
         private Panel panel3;
+        private RadioButton rdoBtn40;
+        private RadioButton rdoBtn30;
+        private RadioButton rdoBtn20;
+        private RadioButton rdoBtn10;
+        private GroupBox grpRowNum;
     }
 }
 

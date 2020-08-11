@@ -35,6 +35,7 @@
             // 
             // GridView
             // 
+            this.GridView.AllowUserToAddRows = false;
             this.GridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.GridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.GridView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
