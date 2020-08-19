@@ -402,9 +402,6 @@ namespace LogParser
 
         private void SearchRow()
         {
-            List<int> rowIndex = new List<int>();
-            Regex regex = new Regex(txtSearch.Text); //Regex 사용하여 특정문자 찾기
-            MatchCollection matches = regex.Matches(richTxtBox.Text);
             DataTable newTable = new DataTable();
 
             foreach (string s in header)
@@ -412,18 +409,37 @@ namespace LogParser
                 newTable.Columns.Add(s, typeof(string));
             }
 
+            string[] texts = txtSearch.Text.Split(',');
+            List<string> newText = new List<string>();
+            foreach (string s in texts)
+            {
+                newText.Add(s.Trim());
+            }
+
             foreach (DataTable t in tables)
             {
-                foreach(DataRow r in t.Rows)
+                foreach (DataRow r in t.Rows)
                 {
-                    if(r[4] != null && r[4].ToString().IndexOf(txtSearch.Text, StringComparison.OrdinalIgnoreCase) >= 0)
+                    if (r[4] != null)
                     {
-                        newTable.Rows.Add(r[0], r[1], r[2], r[3], r[4]);
+                        bool flag = true;
+                        foreach (string s in newText)
+                        { // 지금은 교집합
+                            if (r[4].ToString().IndexOf(s, StringComparison.OrdinalIgnoreCase) < 0)
+                            {
+                                flag = false;
+                                break;
+                            }
+                        }
+                        if (flag)
+                        {
+                            newTable.Rows.Add(r[0], r[1], r[2], r[3], r[4]);
+                        }
                     }
                 }
             }
 
-            if(newTable.Rows.Count == 0)
+            if (newTable.Rows.Count == 0)
             {
                 txtSearch.Text = "";
                 MessageBox.Show("찾으시려는 문자가 존재하지 않습니다!");
@@ -502,10 +518,17 @@ namespace LogParser
 
         private void moveFocus()
         {
-            richTxtBox.Select(locations[index].start, locations[index].end);
-            richTxtBox.SelectionStart = locations[index].start;
-            richTxtBox.Focus();
-            richTxtBox.ScrollToCaret();
+            try
+            {
+                richTxtBox.Select(locations[index].start, locations[index].end);
+                richTxtBox.SelectionStart = locations[index].start;
+                richTxtBox.Focus();
+                richTxtBox.ScrollToCaret();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
