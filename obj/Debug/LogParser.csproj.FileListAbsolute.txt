@@ -9,3 +9,14 @@ C:\Users\Neozensoft\source\repos\LogParser\obj\Debug\LogParser.exe
 C:\Users\Neozensoft\source\repos\LogParser\obj\Debug\LogParser.pdb
 C:\Users\Neozensoft\source\repos\LogParser\obj\Debug\LogParser.csprojAssemblyReference.cache
 C:\Users\Neozensoft\source\repos\LogParser\obj\Debug\LogParser.Form2.resources
+C:\Users\Neozensoft\Desktop\LogParser\obj\Debug\LogParser.csprojAssemblyReference.cache
+C:\Users\Neozensoft\Desktop\LogParser\obj\Debug\LogParser.Form1.resources
+C:\Users\Neozensoft\Desktop\LogParser\obj\Debug\LogParser.Form2.resources
+C:\Users\Neozensoft\Desktop\LogParser\obj\Debug\LogParser.Properties.Resources.resources
+C:\Users\Neozensoft\Desktop\LogParser\obj\Debug\LogParser.csproj.GenerateResource.cache
+C:\Users\Neozensoft\Desktop\LogParser\obj\Debug\LogParser.csproj.CoreCompileInputs.cache
+C:\Users\Neozensoft\Desktop\LogParser\obj\Debug\LogParser.exe
+C:\Users\Neozensoft\Desktop\LogParser\obj\Debug\LogParser.pdb
+C:\Users\Neozensoft\Desktop\LogParser\bin\Debug\LogParser.exe.config
+C:\Users\Neozensoft\Desktop\LogParser\bin\Debug\LogParser.exe
+C:\Users\Neozensoft\Desktop\LogParser\bin\Debug\LogParser.pdb

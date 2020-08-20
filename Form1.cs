@@ -39,9 +39,6 @@ namespace LogParser
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // 행번호 관련
-            LineNumTxtBox.Font = richTxtBox.Font;
-
             // 탐색기 관련
             LoadDirectory();
         }
@@ -65,7 +62,6 @@ namespace LogParser
             if (FileDialog.ShowDialog() == DialogResult.OK)
             {
                 richTxtBox.Clear();
-                LineNumTxtBox.Text = "";
                 txtPath.Text = FileDialog.FileName;
 
                 // Change the PrevPath value
@@ -104,7 +100,6 @@ namespace LogParser
                 text += (i + 1).ToString();
                 text += "\r\n";
             }
-            LineNumTxtBox.Text = text;
         }
 
         // treeview 탐색기
@@ -577,7 +572,6 @@ namespace LogParser
         {
             StreamReader sr = new StreamReader(
                 new FileStream(fullPath, FileMode.Open), Encoding.Default);
-            LineNumTxtBox.Text = "";
             richTxtBox.Text = sr.ReadToEnd();
 
             sr.Close();
@@ -738,11 +732,6 @@ namespace LogParser
             {
                 gridView.DataSource = tables[Int32.Parse(NaviPos.Text) - 1];
             }
-        }
-        // line number 드래그 금지
-        private void LineNumTxtBox_Enter(object sender, EventArgs e)
-        {
-            tabControl2.Focus();
         }
     }
 }

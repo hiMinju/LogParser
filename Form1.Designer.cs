@@ -39,7 +39,6 @@ namespace LogParser
             this.btnParseTable = new System.Windows.Forms.Button();
             this.btnParseTree = new System.Windows.Forms.Button();
             this.richTxtBox = new System.Windows.Forms.RichTextBox();
-            this.LineNumTxtBox = new System.Windows.Forms.RichTextBox();
             this.tabTable = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.gridView = new System.Windows.Forms.DataGridView();
@@ -118,7 +117,6 @@ namespace LogParser
             this.tabText.Controls.Add(this.btnParseTable);
             this.tabText.Controls.Add(this.btnParseTree);
             this.tabText.Controls.Add(this.richTxtBox);
-            this.tabText.Controls.Add(this.LineNumTxtBox);
             this.tabText.Location = new System.Drawing.Point(4, 22);
             this.tabText.Name = "tabText";
             this.tabText.Padding = new System.Windows.Forms.Padding(3);
@@ -161,22 +159,6 @@ namespace LogParser
             this.richTxtBox.TabIndex = 2;
             this.richTxtBox.Text = "";
             this.richTxtBox.WordWrap = false;
-            this.richTxtBox.VScroll += new System.EventHandler(this.myRichTextBox1_VScroll);
-            // 
-            // LineNumTxtBox
-            // 
-            this.LineNumTxtBox.BackColor = System.Drawing.SystemColors.InactiveBorder;
-            this.LineNumTxtBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.LineNumTxtBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LineNumTxtBox.ForeColor = System.Drawing.Color.Blue;
-            this.LineNumTxtBox.Location = new System.Drawing.Point(3, 3);
-            this.LineNumTxtBox.Name = "LineNumTxtBox";
-            this.LineNumTxtBox.ReadOnly = true;
-            this.LineNumTxtBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.LineNumTxtBox.Size = new System.Drawing.Size(66, 512);
-            this.LineNumTxtBox.TabIndex = 1;
-            this.LineNumTxtBox.Text = "";
-            this.LineNumTxtBox.Enter += new System.EventHandler(this.LineNumTxtBox_Enter);
             // 
             // tabTable
             // 
@@ -626,7 +608,6 @@ namespace LogParser
         private Button btnParseTable;
         private Button btnParseTree;
         private RichTextBox richTxtBox;
-        private RichTextBox LineNumTxtBox;
         private TabPage tabTable;
         private Panel panel2;
         private DataGridView gridView;
